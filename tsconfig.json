@@ -1,0 +1,27 @@
+{
+    "_comment": "http://www.typescriptlang.org/docs/handbook/compiler-options.html",
+    "compilerOptions": {
+        // "outDir": "./assetstest/",
+        "sourceMap": true,
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "module": "es6",
+        "moduleResolution": "node",
+        "target": "es5",
+        "lib": [
+            "es2015",
+            "es2017",
+            "dom"
+        ],
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}
