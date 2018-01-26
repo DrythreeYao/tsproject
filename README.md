@@ -24,7 +24,7 @@
 ``` js
 │  .bowerrc                          bower管理工具的配置文件，配置下载目录、代理等
 │  .babelrc                          babel配置文件，使用ts可移除
-│  .eslintrc                         eslint配置文件，使用ts可移除
+│  .eslintrc                         eslint配置文件，使用ts可移除
 │  .gitignore                        git项目忽略文件
 │  .npmrc                            npm管理工具的配置文件，可配置代理等
 │  gulpfile.js                       gulp任务配置文件
