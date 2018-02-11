@@ -1,13 +1,13 @@
 # 前端页面制作规范
 
-## 项目必要知识点
+## 项目必要知识点
 
 - [node](https://nodejs.org/en/) 点击下载node
 - [gulp](https://github.com/gulpjs/gulp) 构建工具介绍
 - [sass](http://www.w3cplus.com/sassguide/syntax.html) Sass入门语法
 - [es6 ](http://es6.ruanyifeng.com/) ECMAScript 6 入门
 - [ts  ](https://www.tslang.cn/docs/home.html) TypeScript文档
-- [vue ](https://cn.vuejs.org/v2/guide/) vue入门指南
+- [vue ](https://cn.vuejs.org/v2/guide/) vue入门指南
 
 ## 运行项目
 
@@ -22,7 +22,8 @@
 - 其中 src/core 目录,项目初建时规定，不可任意扩展，需团队协商后再更新内容
 
 ``` js
-│  .eslintrc                         eslint配置文件，使用ts可移除
+│  .babelrc                          babel配置文件，使用ts可移除
+│  .eslintrc                         eslint配置文件，使用ts可移除
 │  .gitignore                        git项目忽略文件
 │  .npmrc                            npm管理工具的配置文件，可配置代理等
 │  gulpfile.js                       gulp任务配置文件
