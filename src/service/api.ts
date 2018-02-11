@@ -1,6 +1,6 @@
 import axios, { AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { app, constants } from '../core/ts/app'
-import Singleton from '../core/ts/Singleton'
+import Singleton from '../core/ts/singleton'
 import config from '../core/ts/config'
 import qs from 'qs';
 
