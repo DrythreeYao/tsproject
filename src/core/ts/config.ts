@@ -1,5 +1,5 @@
 import { constants, tools } from './app'
-import Singleton from './Singleton';
+import Singleton from './singleton';
 declare let __DEV__: any
 declare let __TEST__: any
 declare let __PRODUCTION__: any

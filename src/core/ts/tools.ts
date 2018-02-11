@@ -1,4 +1,4 @@
-import Singleton from './Singleton'
+import Singleton from './singleton'
 
 interface ITools {
     isWeChatBrowser(): boolean,

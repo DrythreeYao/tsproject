@@ -1,5 +1,5 @@
 import './index.scss'
-import { Person } from './Person'
+import { Person } from './person'
 import ydAuctionService, { YDAuction } from '../../service/yd-auction';
 import { constants } from '../../core/ts/app';
 import Vue from 'vue';

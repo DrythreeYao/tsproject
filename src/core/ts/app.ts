@@ -2,12 +2,12 @@ import * as constants from './constants'
 import tools from './tools'
 import platform from 'platform'
 import store from 'store'
-import Singleton from './Singleton'
+import Singleton from './singleton';
 
 /**
  * 登录用户信息
  */
-interface IUser {
+interface User {
     id: number, // 用户标识
     sid: string, // 登录后的会话id
 }
@@ -15,7 +15,7 @@ interface IUser {
 /**
  * 应用信息
  */
-interface IAppInfo {
+interface AppInfo {
     uuid: string, // app设备标识
     device: string, // 设备类型
     appkey: string, // 应用key
@@ -27,7 +27,7 @@ interface IAppInfo {
 /**
  * 应用设置
  */
-interface IAppSetting {
+interface AppSetting {
     locale: string // 语言
 }
 
@@ -35,9 +35,9 @@ interface IAppSetting {
  * 应用级别的共享数据
  */
 class App extends Singleton {
-    private user: IUser
-    private appInfo: IAppInfo
-    private appSetting: IAppSetting
+    private user: User
+    private appInfo: AppInfo
+    private appSetting: AppSetting
 
     /**
      * 构造
@@ -129,14 +129,14 @@ class App extends Singleton {
      * 设置登录用户信息
      * @param user 登录用户
      */
-    setUser(user: IUser): void {
+    setUser(user: User): void {
         this.user = user
     }
 
     /**
      * 获取登录用户信息
      */
-    getUser(): IUser {
+    getUser(): User {
         return this.user
     }
 
@@ -144,7 +144,7 @@ class App extends Singleton {
      * 持久化user
      * @param user
      */
-    storageUser(user: IUser): void {
+    storageUser(user: User): void {
         let userMerger = Object.assign({}, this.getUser(), user)
         this.setUser(userMerger) // 更新
         if (store.enabled) {
@@ -156,14 +156,14 @@ class App extends Singleton {
      * 设置应用信息
      * @param appInfo 应用信息
      */
-    setAppInfo(appInfo: IAppInfo): void {
+    setAppInfo(appInfo: AppInfo): void {
         this.appInfo = appInfo
     }
 
     /**
      * 获取应用信息
      */
-    getAppInfo(): IAppInfo {
+    getAppInfo(): AppInfo {
         return this.appInfo
     }
 
@@ -171,14 +171,14 @@ class App extends Singleton {
      * 设置偏好设置
      * @param appSetting 偏好设置
      */
-    setAppSetting(appSetting: IAppSetting): void {
+    setAppSetting(appSetting: AppSetting): void {
         this.appSetting = appSetting
     }
 
     /**
      * 获取偏好设置
      */
-    getAppSetting(): IAppSetting {
+    getAppSetting(): AppSetting {
         return this.appSetting
     }
 
@@ -186,7 +186,7 @@ class App extends Singleton {
      * 持久化偏好设置
      * @param appSetting
      */
-    storageAppSetting(appSetting: IAppSetting): void {
+    storageAppSetting(appSetting: AppSetting): void {
         let appSettingMerger = Object.assign({}, this.getAppSetting(), appSetting)
         this.setAppSetting(appSettingMerger) // 更新
         if (store.enabled) {
