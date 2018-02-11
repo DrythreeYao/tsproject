@@ -1,4 +1,4 @@
-import Singleton from '../core/ts/Singleton';
+import Singleton from '../core/ts/singleton';
 import { constants } from '../core/ts/app';
 import apiService from './api';
 
@@ -34,6 +34,15 @@ class YDAuctionService extends Singleton {
             pageNum: pageNum,
             hasSearch: hasSearch,
         })
+    }
+    test(ms: number) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                return {
+                    name: 'Hello word!',
+                }
+            }, ms);
+        });
     }
 }
 

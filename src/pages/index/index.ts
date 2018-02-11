@@ -15,6 +15,7 @@ let vm = new Vue({
     methods: {
         init() {
             this.findYDAuctions()
+            this.test()
         },
         async findYDAuctions() {
             console.log('loading')
@@ -30,6 +31,12 @@ let vm = new Vue({
             this.auctionList = auctionList
 
             console.log('end ', res)
+        },
+
+        async test() {
+            let data = await ydAuctionService.test(1000)
+            console.log(data)
+
         },
     },
 })
