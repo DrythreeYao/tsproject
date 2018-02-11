@@ -1,13 +1,13 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var config = require('../config');
+var path = require('path')
+var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var config = require('../config')
 
-const SOURCE_CODE_ROOT = config.constants.sourceCodeRoot;
-const ASSETS_PATH = config.constants.assetsPath;
-const WEBPACK_PUBLISH_ROOT = config.constants.webpackPublishRoot;
-const LIB_MANIFEST = '../' + WEBPACK_PUBLISH_ROOT + '/' + config.constants.libManifest;
-const INCLUDE_PATHS = path.resolve(__dirname, '../' + SOURCE_CODE_ROOT + '/core');
+const SOURCE_CODE_ROOT = config.constants.sourceCodeRoot
+const ASSETS_PATH = config.constants.assetsPath
+const WEBPACK_PUBLISH_ROOT = config.constants.webpackPublishRoot
+const LIB_MANIFEST = '../' + WEBPACK_PUBLISH_ROOT + '/' + config.constants.libManifest
+const INCLUDE_PATHS = path.resolve(__dirname, '../' + SOURCE_CODE_ROOT + '/core')
 
 module.exports = {
     module: {
@@ -58,9 +58,10 @@ module.exports = {
             'babel-polyfill/browser.js',
             'vue/dist/vue.esm.js',
             'vue-router/dist/vue-router.min.js',
-            'url-search-params/build/url-search-params.js',
             'qs/dist/qs.js',
             'axios/dist/axios.min',
+            'platform/platform',
+            'store/dist/store.modern.min'
             // 'core/app.scss' 如果使用了比较大的ui库， 此处可配置， 然后在使用的地方引入lib.css
         ]
     },

@@ -13,7 +13,11 @@
 </head>
 
 <body>
-    <div class="test">test en</div>
+    <div class="test" id="app">
+        <ul v-for="auction in auctionList">
+            <li>{{auction.name}}</li>
+        </ul>
+    </div>
     <script src="/assets/index/index.js"></script>
 </body>
 

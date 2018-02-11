@@ -6,7 +6,7 @@
     "rules": {
         "no-console": [false],
         "no-conditional-assignment": true,
-        "semicolon": [true, "never"],
+        "semicolon": [false, "never"],
         "trailing-comma": [
             true,
             {

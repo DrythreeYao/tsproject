@@ -22,8 +22,6 @@
 - 其中 src/core 目录,项目初建时规定，不可任意扩展，需团队协商后再更新内容
 
 ``` js
-│  .bowerrc                          bower管理工具的配置文件，配置下载目录、代理等
-│  .babelrc                          babel配置文件，使用ts可移除
 │  .eslintrc                         eslint配置文件，使用ts可移除
 │  .gitignore                        git项目忽略文件
 │  .npmrc                            npm管理工具的配置文件，可配置代理等

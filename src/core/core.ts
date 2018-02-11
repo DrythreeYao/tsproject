@@ -1,31 +1,15 @@
-// 核心包，引入一些公共函数的兼容包、公共样式
+/**
+ * 核心包，引入一些公共函数的兼容包、公共样式
+ */
+
+// 通用样式
 import './core.scss'
 
-// 处理全局对象兼容性
-import 'browser-polyfill'
-import URLSearchParams from 'url-search-params'
+// 浏览器polyfill
+import './ts/polyfill'
 
-if (!('searchParams' in HTMLAnchorElement.prototype)) {
-    window.URLSearchParams = URLSearchParams
-}
-
-// // 动画兼容
-// if (!window.requestAnimationFrame) {
-//     window.requestAnimationFrame = (window.webkitRequestAnimationFrame ||
-//         window.mozRequestAnimationFrame ||
-//         window.oRequestAnimationFrame ||
-//         window.msRequestAnimationFrame ||
-//         function(callback) {
-//             return window.setTimeout(callback, 1000 / 60);
-//         });
-
-// }
-
-// if (!window.cancelAnimationFrame) {
-//     window.cancelAnimationFrame = (window.cancelRequestAnimationFrame ||
-//         window.webkitCancelAnimationFrame || window.webkitCancelRequestAnimationFrame ||
-//         window.mozCancelAnimationFrame || window.mozCancelRequestAnimationFrame ||
-//         window.msCancelAnimationFrame || window.msCancelRequestAnimationFrame ||
-//         window.oCancelAnimationFrame || window.oCancelRequestAnimationFrame ||
-//         window.clearTimeout);
-// }
+// 初始化环境信息
+import config from './ts/config'
+import { app } from './ts/app'
+// import Cookies from 'js-cookie'
+app.init()

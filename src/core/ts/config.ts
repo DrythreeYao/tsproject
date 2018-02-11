@@ -1,4 +1,5 @@
 import { constants, tools } from './app'
+import Singleton from './Singleton';
 declare let __DEV__: any
 declare let __TEST__: any
 declare let __PRODUCTION__: any
@@ -13,37 +14,27 @@ interface IEnv {
     wsDomain?: string, // websocket地址前缀
 }
 
-class Config {
-    /**
-     * instance 当前实例
-     */
-    static instance: Config
-
-    /**
-     * getInstantce 获取单例
-     * @return {Config}
-     */
-    static getInstance(): Config {
-        if (false === this.instance instanceof this) {
-            this.instance = new this
-        }
-        return this.instance
-    }
+class Config extends Singleton {
 
     /**
      * 项目环境变量
      */
-    private env: IEnv
+    private env: IEnv = ({
+        service: '',
+        domain: '',
+        cdnDomain: '',
+    })
 
     /**
      * 构造
      */
     constructor() {
+        super()
         if (__DEV__) {
             tools.log('Current operating environment is DEV')
             this.setEnv({
-                service: 'http://twei.yidianchina.com/api',
-                domain: 'http://twei.yidianchina.com',
+                service: 'http://www.yidianchina.com/',
+                domain: 'http://www.yidianchina.com/',
                 cdnDomain: 'http://static.yidianchina.com',
             })
         }
@@ -81,5 +72,6 @@ class Config {
     }
 }
 
-export default Config.getInstance()
+let config: Config = Config.getInstance('Config')
+export default config
 

@@ -1,5 +1,9 @@
-import constants from './constants'
+import * as constants from './constants'
 import tools from './tools'
+import platform from 'platform'
+import store from 'store'
+import Singleton from './Singleton'
+
 /**
  * 登录用户信息
  */
@@ -30,23 +34,7 @@ interface IAppSetting {
 /**
  * 应用级别的共享数据
  */
-class APP {
-    /**
-     * instance 当前实例
-     */
-    static instance: APP
-
-    /**
-     * getInstantce 获取单例
-     * @return {Config}
-     */
-    static getInstance(): APP {
-        if (false === this.instance instanceof this) {
-            this.instance = new this
-        }
-        return this.instance
-    }
-
+class App extends Singleton {
     private user: IUser
     private appInfo: IAppInfo
     private appSetting: IAppSetting
@@ -55,21 +43,86 @@ class APP {
      * 构造
      */
     constructor() {
-        this.setUser({
-            id: 0,
-            sid: '',
-        })
-        this.setAppInfo({
+        super()
+        this.appInfo = {
             uuid: '',
             device: '',
-            appkey: 'web',
+            appkey: '',
             pt: '',
             ptVersion: '',
-            appVersion: '1.0.0',
-        })
-        this.setAppSetting({
+            appVersion: '',
+        }
+        this.user = {
+            id: 0,
+            sid: '',
+        }
+        this.appSetting = {
+            locale: '',
+        }
+    }
+
+    /**
+     * 初始化
+     */
+    init(): void {
+        this.initAppInfo()
+        this.initUser()
+        this.initAppSetting()
+    }
+
+    /**
+     * 初始化应用信息
+     */
+    private initAppInfo(): void {
+        let appInfo = Object.assign({}, this.getAppInfo())
+        let os = platform.os
+        if (os) {
+            appInfo.ptVersion = os.version || ''
+            appInfo.pt = os.family || ''
+        }
+
+        if (platform.product === null) {
+            appInfo.device = constants.DEVICE.WEB_PC
+        } else {
+            if (tools.isWeChatBrowser()) {
+                appInfo.device = constants.DEVICE.WEB_WECHAT
+            } else {
+                appInfo.device = constants.DEVICE.WEB_MOBILE
+            }
+        }
+        this.setAppInfo(appInfo)
+        // tools.log('initAppInfo ' + JSON.stringify(this.getAppInfo()))
+    }
+
+    /**
+     * 初始化user
+     */
+    private initUser(): void {
+        // 写入本地缓存
+        if (store.enabled) {
+            let userCache = store.get(constants.CACHE_KEY.USER)
+            if (userCache === undefined) {
+                this.storageUser(this.getUser())
+            }
+        }
+        // tools.log('initUser ' + JSON.stringify(this.getUser()))
+    }
+
+    /**
+     * 初始化应用设置
+     */
+    private initAppSetting(): void {
+        let appSetting = {
             locale: 'zh-CN',
-        })
+        }
+        // 写入本地缓存
+        if (store.enabled) {
+            let appSettingCache = store.get(constants.CACHE_KEY.SETTING)
+            if (appSettingCache === undefined) {
+                this.storageAppSetting(appSetting)
+            }
+        }
+        // tools.log('initAppSetting ' + JSON.stringify(this.getAppSetting()))
     }
 
     /**
@@ -85,6 +138,18 @@ class APP {
      */
     getUser(): IUser {
         return this.user
+    }
+
+    /**
+     * 持久化user
+     * @param user
+     */
+    storageUser(user: IUser): void {
+        let userMerger = Object.assign({}, this.getUser(), user)
+        this.setUser(userMerger) // 更新
+        if (store.enabled) {
+            store.set(constants.CACHE_KEY.USER, userMerger)
+        }
     }
 
     /**
@@ -116,9 +181,21 @@ class APP {
     getAppSetting(): IAppSetting {
         return this.appSetting
     }
+
+    /**
+     * 持久化偏好设置
+     * @param appSetting
+     */
+    storageAppSetting(appSetting: IAppSetting): void {
+        let appSettingMerger = Object.assign({}, this.getAppSetting(), appSetting)
+        this.setAppSetting(appSettingMerger) // 更新
+        if (store.enabled) {
+            store.set(constants.CACHE_KEY.SETTING, appSettingMerger)
+        }
+    }
 }
 
-let app = APP.getInstance()
+let app: App = App.getInstance('App')
 
 export {
     app,

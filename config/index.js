@@ -7,7 +7,7 @@ module.exports = {
         libManifest: 'lib-manifest.json' // 独立打包的库文件的映射地址
     },
     production: {
-        assetsDomain: 'http://127.0.0.1:8899' // 资源所在位置的域名
+        assetsDomain: 'http://127.0.0.1:8081' // 资源所在位置的域名
     },
     test: {
         assetsDomain: ''
