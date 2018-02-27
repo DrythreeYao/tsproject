@@ -21,7 +21,7 @@
     "rules": {
         "no-console": [0],
         "no-cond-assign": [2, "always"],
-        "semi": [2, "never"],
+        "semi": [0, "never"],
         "comma-dangle": [0, "never"],
         "indent": [0, 4, {
             "SwitchCase": 1,

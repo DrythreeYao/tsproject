@@ -45,9 +45,9 @@ class Config {
         if (__TEST__) {
             tools.log('Current operating environment is TEST')
             this.setEnv({
-                service: 'http://www.somename.com/api',
-                domain: 'http://www.somename.com',
-                cdnDomain: 'http://static.somename.com',
+                service: 'http://www.yidianchina.com/',
+                domain: 'http://www.yidianchina.com/',
+                cdnDomain: 'http://static.yidianchina.com',
             })
         }
         if (__PRODUCTION__) {
