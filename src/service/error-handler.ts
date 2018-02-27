@@ -1,7 +1,5 @@
 import { constants, tools } from '../core/ts/app';
 import { AxiosError } from 'axios'
-import { ResponseData } from './api';
-
 
 /**
  * 错误处理函数接口

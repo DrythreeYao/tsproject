@@ -14,7 +14,7 @@ interface Header {
 /**
  * 服务器返回数据格式
  */
-export interface ResponseData {
+export interface ServerData {
     message: string,
     stateCode: number,
     data?: any
@@ -46,7 +46,7 @@ class ApiService {
         })
 
         // Add a response interceptor
-        axios.interceptors.response.use((response: AxiosResponse<ResponseData>) => {
+        axios.interceptors.response.use((response: AxiosResponse<ServerData>) => {
             // Do something with response data
             let code = response.data.stateCode
             // 业务成功
@@ -81,7 +81,7 @@ class ApiService {
      * @param url   请求地址
      * @param data  请求参数
      */
-    get(url: string, config?: AxiosRequestConfig): AxiosPromise<ResponseData> {
+    get(url: string, config?: AxiosRequestConfig): AxiosPromise<ServerData> {
         return axios.get(url).catch(err => {
             throw err
         })
@@ -92,7 +92,7 @@ class ApiService {
     * @param url   请求地址
     * @param data  请求参数
     */
-    post(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<ResponseData> {
+    post(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<ServerData> {
         return axios.post(url, qs.stringify(data))
             .catch(err => {
                 throw err
