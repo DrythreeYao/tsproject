@@ -1,5 +1,4 @@
 import { constants, tools } from './app'
-import Singleton from './singleton';
 declare let __DEV__: any
 declare let __TEST__: any
 declare let __PRODUCTION__: any
@@ -7,19 +6,19 @@ declare let __PRODUCTION__: any
 /**
  * 环境变量
  */
-interface IEnv {
+interface Env {
     service: string, // 服务地址前缀
     domain: string, // 环境地址前缀
     cdnDomain: string, // 资源cdn前缀
     wsDomain?: string, // websocket地址前缀
 }
 
-class Config extends Singleton {
+class Config {
 
     /**
      * 项目环境变量
      */
-    private env: IEnv = ({
+    private env: Env = ({
         service: '',
         domain: '',
         cdnDomain: '',
@@ -29,7 +28,12 @@ class Config extends Singleton {
      * 构造
      */
     constructor() {
-        super()
+    }
+
+    /**
+     * 初始化
+     */
+    init() {
         if (__DEV__) {
             tools.log('Current operating environment is DEV')
             this.setEnv({
@@ -60,18 +64,18 @@ class Config extends Singleton {
      * 设置项目环境变量
      * @param env 环境变量
      */
-    setEnv(env: IEnv): void {
+    setEnv(env: Env): void {
         this.env = env
     }
 
     /**
      * 获取项目环境变量
      */
-    getEvn(): IEnv {
+    getEvn(): Env {
         return this.env
     }
 }
 
-let config: Config = Config.getInstance('Config')
+let config: Config = new Config()
 export default config
 

@@ -12,4 +12,5 @@ import './ts/polyfill'
 import config from './ts/config'
 import { app } from './ts/app'
 // import Cookies from 'js-cookie'
+config.init()
 app.init()

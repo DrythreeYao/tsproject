@@ -1,22 +1,30 @@
-import axios, { AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios'
+import promiseFinally from 'promise.prototype.finally'
+import axios, { AxiosPromise, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import { app, constants } from '../core/ts/app'
-import Singleton from '../core/ts/singleton'
 import config from '../core/ts/config'
 import qs from 'qs';
 
 /**
  * http header参数
  */
-interface IHeader {
+interface Header {
     sid: string, // 会话id
+}
+
+/**
+ * 服务器返回数据格式
+ */
+export interface ResponseData {
+    message: string,
+    stateCode: number,
+    data?: any
 }
 
 /**
  * 异步基础函数
  */
-class ApiService extends Singleton {
+class ApiService {
     constructor() {
-        super()
         this.init()
     }
 
@@ -38,13 +46,34 @@ class ApiService extends Singleton {
         })
 
         // Add a response interceptor
-        axios.interceptors.response.use((response: AxiosResponse<any>) => {
+        axios.interceptors.response.use((response: AxiosResponse<ResponseData>) => {
             // Do something with response data
-            return response
-        }, (error: any) => {
+            let code = response.data.stateCode
+            // 业务成功
+            if (code === constants.ERROR.SUCCESS) {
+                return response
+            } else {
+                let e: AxiosError
+                e = {
+                    config: response.config,
+                    name: 'Business Error',
+                    message: 'Business Error: stateCode is not 101',
+                    response: response,
+                }
+                return Promise.reject(e)
+            }
+        }, (error: AxiosError) => {
             // Do something with response error
             return Promise.reject(error)
         })
+    }
+
+    /**
+     * 更新header
+     * @param header
+     */
+    setHeader(header: Header) {
+        Object.assign(axios.defaults.headers.common, header)
     }
 
     /**
@@ -52,8 +81,10 @@ class ApiService extends Singleton {
      * @param url   请求地址
      * @param data  请求参数
      */
-    get(url: string, config?: AxiosRequestConfig): AxiosPromise<any> {
-        return axios.get(url)
+    get(url: string, config?: AxiosRequestConfig): AxiosPromise<ResponseData> {
+        return axios.get(url).catch(err => {
+            throw err
+        })
     }
 
     /**
@@ -61,27 +92,14 @@ class ApiService extends Singleton {
     * @param url   请求地址
     * @param data  请求参数
     */
-    post(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<any> {
+    post(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<ResponseData> {
         return axios.post(url, qs.stringify(data))
+            .catch(err => {
+                throw err
+                // return err
+            })
     }
 }
 
-let apiService: ApiService = ApiService.getInstance('ApiService')
+let apiService: ApiService = new ApiService()
 export default apiService
-
-// /**
-//  * 设置header参数
-//  * @param {Object} params 参数对象
-//  */
-// function setHeader(params: IHeader) {
-//     Object.assign(axios.defaults.headers.common, params)
-// }
-
-// /**
-//  * 业务成功失败的验证方法
-//  * @return {Boolean} 返回业务成功or失败
-//  */
-// function validate() {
-//     var result = true
-//     return result
-// }

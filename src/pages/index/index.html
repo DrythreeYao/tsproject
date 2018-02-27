@@ -13,8 +13,9 @@
 </head>
 
 <body>
-    <div class="test" id="app">
-        <ul v-for="auction in auctionList">
+    <div class="container" id="app">
+        <ul v-for="(auction, index) in auctionList">
+            <li v-if="index === 0"><img class="banner" :src="auction.customPic.url" alt=""></li>
             <li>{{auction.name}}</li>
         </ul>
     </div>

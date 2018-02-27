@@ -1,50 +1,41 @@
-import Singleton from '../core/ts/singleton';
 import { constants } from '../core/ts/app';
 import apiService from './api';
-
-/**
- * 艺典同步拍拍场
- */
-export interface YDAuction {
-    activeStatus: constants.YD_AUCTION_STATUS
-    auctionType: constants.AUCTION_TYPE
-    beginTime: number
-    bidCount: number
-    concern: boolean
-    endTime: number
-    id: number
-    name: string
-    pictureUrl: string
-    portrait: string
-    publisher: string
-    publisherId: number
-    tradingPriceCount: number
-    visitCount: number
-    whetherTodayEnd: boolean
-}
+import { YDAuction } from '../vo/YDAuction';
 
 /**
  * 艺典拍业务
  */
-class YDAuctionService extends Singleton {
+class YDAuctionService {
+    /**
+     * 获取拍场集合
+     * @param activeStatus  拍场状态
+     * @param pageNum   页码
+     * @param pageSize  每页条目
+     * @param hasSearch
+     */
     findYDAuctions(activeStatus: number, pageNum: number = 1, pageSize: number = 5, hasSearch: number = 3) {
         return apiService.post('netauctionsite/search', {
             activeStatus: activeStatus,
             pageSize: pageSize,
             pageNum: pageNum,
             hasSearch: hasSearch,
-        })
-    }
-    test(ms: number) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                return {
-                    name: 'Hello word!',
+        }).then(res => {
+            let list: YDAuction[] = res.data.data.result
+            let i = 0
+            for (const item of list) {
+                item.customProperty = '序列' + i++
+                item.customPic = {
+                    id: 1,
+                    url: 'https://www.tslang.cn/assets/images/logo_nocircle.svg',
                 }
-            }, ms);
-        });
+            }
+            // console.log(res.data.data.a.b)
+            return res
+        })
+        // return apiService.post('information/findAuctionInformations')
+        // return apiService.post('userinfo/getNoReadProduct')
     }
 }
 
-let ydAuctionService: YDAuctionService = YDAuctionService.getInstance('YDAuctionService')
+let ydAuctionService: YDAuctionService = new YDAuctionService()
 export default ydAuctionService

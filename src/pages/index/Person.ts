@@ -1,4 +1,6 @@
-class Person {
+import { app } from '../../core/ts/app';
+
+export class Person {
     name: string
     constructor(name: string) {
         this.name = name
@@ -8,4 +10,3 @@ class Person {
         console.log('hello ' + this.name)
     }
 }
-export { Person }

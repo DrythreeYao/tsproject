@@ -1,16 +1,4 @@
-import Singleton from './singleton'
-
-interface ITools {
-    isWeChatBrowser(): boolean,
-    log(message: string): void,
-    parseTimestamp(dateStr?: string): number,
-}
-
-class Tools extends Singleton implements ITools {
-    constructor() {
-        super()
-    }
-
+class Tools {
     /**
      * 判断是否是微信应用中的浏览器
      */
@@ -28,8 +16,8 @@ class Tools extends Singleton implements ITools {
      * 打印日志
      * @param message 字符串信息
      */
-    log(message: string): void {
-        console.log('%c' + message, 'color: green;font-size:16px;')
+    log(message: string = '', color: string = 'green'): void {
+        console.log('%c' + message, 'color:' + color + ';font-size:14px;')
     }
 
     /**
@@ -70,5 +58,6 @@ class Tools extends Singleton implements ITools {
     }
 }
 
-let tools: ITools = Tools.getInstance('Tools')
+let tools: Tools = new Tools()
+
 export default tools

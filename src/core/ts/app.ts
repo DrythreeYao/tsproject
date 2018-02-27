@@ -2,7 +2,6 @@ import * as constants from './constants'
 import tools from './tools'
 import platform from 'platform'
 import store from 'store'
-import Singleton from './singleton';
 
 /**
  * 登录用户信息
@@ -34,7 +33,7 @@ interface AppSetting {
 /**
  * 应用级别的共享数据
  */
-class App extends Singleton {
+class App {
     private user: User
     private appInfo: AppInfo
     private appSetting: AppSetting
@@ -43,7 +42,6 @@ class App extends Singleton {
      * 构造
      */
     constructor() {
-        super()
         this.appInfo = {
             uuid: '',
             device: '',
@@ -195,7 +193,7 @@ class App extends Singleton {
     }
 }
 
-let app: App = App.getInstance('App')
+let app: App = new App()
 
 export {
     app,

@@ -1,11 +1,9 @@
 import './index.scss'
-import { Person } from './person'
-import ydAuctionService, { YDAuction } from '../../service/yd-auction';
-import { constants } from '../../core/ts/app';
+import { tools, constants, app } from '../../core/ts/app';
+import ydAuctionService from '../../service/yd-auction';
 import Vue from 'vue';
-
-let p = new Person('test')
-p.sayHello()
+import errorHandler from '../../service/error-handler';
+import { YDAuction } from '../../vo/YDAuction';
 
 let vm = new Vue({
     el: '#app',
@@ -14,29 +12,24 @@ let vm = new Vue({
     },
     methods: {
         init() {
+            tools.log('-> begin')
             this.findYDAuctions()
-            this.test()
+                .catch(errorHandler())
+                .finally(() => {
+                    tools.log('-> end finally')
+                })
         },
         async findYDAuctions() {
-            console.log('loading')
             let res = await ydAuctionService.findYDAuctions(constants.YD_AUCTION_STATUS.ALL)
+            let data = res.data.data
 
-            let auctionList = (res.data.data.result)
-
-            for (const item of auctionList) {
-                let auction = <YDAuction>item
-
-                console.log(auction.name)
+            let auctionList = data.result
+            let auction: YDAuction
+            for (auction of auctionList) {
+                tools.log(auction.customProperty)
+                // auction.name = '改变数据'
             }
             this.auctionList = auctionList
-
-            console.log('end ', res)
-        },
-
-        async test() {
-            let data = await ydAuctionService.test(1000)
-            console.log(data)
-
         },
     },
 })
