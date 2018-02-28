@@ -13,7 +13,7 @@ module.exports = {
     module: {
         rules: [{
             enforce: 'pre',
-            test: /\.ts$/,
+            test: /\.ts|tsx$/,
             use: {
                 loader: 'tslint-loader',
                 options: {
@@ -46,7 +46,7 @@ module.exports = {
                 loader: 'babel-loader'
             }
         }, {
-            test: /\.tsx?$/,
+            test: /\.ts|tsx?$/,
             use: 'ts-loader'
         }, {
             test: /\.css$/,
@@ -60,13 +60,20 @@ module.exports = {
             include: /(?=.*core)/,
             use: [
                 'style-loader',
-                'css-loader',
+                {
+                    loader: 'css-loader',
+                    options: {
+                        minimize: true,
+                        sourceMap: true
+                    }
+                },
                 'postcss-loader',
                 {
                     loader: 'sass-loader', // compiles Sass to CSS
                     options: {
                         outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'nested',
-                        includePaths: [INCLUDE_PATHS]
+                        includePaths: [INCLUDE_PATHS],
+                        sourceMap: true
                     }
                 }
             ]
@@ -74,14 +81,20 @@ module.exports = {
             test: /\.scss$/,
             include: /^(?=.*pages)/,
             use: ExtractTextPlugin.extract({
-                use: [
-                    'css-loader',
+                use: [{
+                        loader: 'css-loader',
+                        options: {
+                            minimize: true,
+                            sourceMap: true
+                        }
+                    },
                     'postcss-loader',
                     {
                         loader: 'sass-loader',
                         options: {
                             outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'nested',
-                            includePaths: [INCLUDE_PATHS]
+                            includePaths: [INCLUDE_PATHS],
+                            sourceMap: true
                         }
                     }
                 ],
@@ -139,6 +152,7 @@ module.exports = {
     entry: {
         'core': 'core/core',
         'index/index': 'pages/index/index', // 入口页
+        'demo/demo': 'pages/demo/demo', // demo
     },
     output: {
         path: path.join(__dirname, '../' + WEBPACK_PUBLISH_ROOT),

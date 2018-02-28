@@ -1,5 +1,5 @@
 var path = require('path');
-var fs = require("fs");
+var fs = require('fs');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 // var WebpackMd5Hash = require('webpack-md5-hash'); // 不能识别webpack后添加的code变动，导致文件内容变化但是文件的hash值未变化
