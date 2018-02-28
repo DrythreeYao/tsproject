@@ -15,7 +15,7 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             filename: 'common.js',
-            minChunks: 5
+            minChunks: 2
         })
     ]
 }

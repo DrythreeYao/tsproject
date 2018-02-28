@@ -1,5 +1,5 @@
 var path = require('path');
-var fs = require("fs");
+var fs = require('fs');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var config = require('../config');

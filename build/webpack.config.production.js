@@ -34,7 +34,7 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             filename: 'common-[chunkhash]' + LIB_CHUNKHASH + '.js',
-            minChunks: Number.MAX_VALUE,
+            minChunks: Number.MAX_VALUE, // 若是多页应用，此处适当调整
         }),
         new webpack.optimize.UglifyJsPlugin({
             minimize: true,
