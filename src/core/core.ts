@@ -3,14 +3,18 @@
  */
 
 // 通用样式
+
+// import 'element-ui/lib/theme-chalk/index.css'
+import Element from 'element-ui'
 import './core.scss'
 
-// 浏览器polyfill
 import './ts/polyfill'
-
-// 初始化环境信息
 import config from './ts/config'
 import { app } from './ts/app'
-// import Cookies from 'js-cookie'
+import Vue from 'vue'
+// 初始化环境配置
 config.init()
 app.init()
+
+// 初始化ui
+Vue.use(Element)

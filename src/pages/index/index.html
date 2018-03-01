@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ts demo</title>
+    <link rel="stylesheet" href="/assets/core.css">
     <link rel="stylesheet" href="/assets/index/index.css">
     <script src="/assets/common.js"></script>
     <script src="/assets/lib.js"></script>
@@ -13,11 +14,29 @@
 </head>
 
 <body>
-    <div class="container" id="app">
-        <ul v-for="(auction, index) in auctionList">
-            <li v-if="index === 0"><img class="banner" :src="auction.customPic.url" alt=""></li>
-            <li>{{auction.name}}</li>
-        </ul>
+    <div id="app">
+        <el-container class="index">
+            <el-header>Header</el-header>
+            <el-container>
+                <el-aside menu width="200px">Aside</el-aside>
+                <el-main>
+                    <el-table :data="auctionList" style="width: 100%">
+                        <el-table-column prop="customProperty" label="序列" width="180"></el-table-column>
+                        <el-table-column prop="id" label="标识" width="180"></el-table-column>
+                        <el-table-column prop="publisher" label="发布者" width="180"></el-table-column>
+                        <el-table-column prop="name" label="标题"></el-table-column>
+                        <el-table-column fixed="right" label="操作" width="100">
+                            <template slot-scope="scope">
+                                <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                                <el-button type="text" size="small">编辑</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                    <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+                </el-main>
+            </el-container>
+            <el-footer>Footer</el-footer>
+        </el-container>
     </div>
     <script src="/assets/index/index.js"></script>
 </body>

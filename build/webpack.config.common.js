@@ -79,7 +79,7 @@ module.exports = {
             ]
         }, {
             test: /\.scss$/,
-            include: /^(?=.*pages)/,
+            // include: /^(?=.*pages)/,
             use: ExtractTextPlugin.extract({
                 use: [{
                         loader: 'css-loader',
@@ -130,6 +130,7 @@ module.exports = {
         ],
         extensions: ['.tsx', '.ts', '.js'],
         alias: {
+            // 'element-ui': 'element-ui/lib/index.js',
             'browser-polyfill$': 'babel-polyfill/browser.js',
             'vue$': 'vue/dist/vue.esm.js',
             'vue-router$': 'vue-router/dist/vue-router.min.js',
@@ -137,7 +138,7 @@ module.exports = {
             'axios$': 'axios/dist/axios.min.js',
             'platform$': 'platform/platform',
             'store$': 'store/dist/store.modern.min',
-            'url-search-params': 'url-search-params/build/url-search-params.js',
+            'url-search-params$': 'url-search-params/build/url-search-params.js',
             // 'jquery$': 'jquery/dist/jquery.js',
             // 'lodash$': 'lodash/dist/lodash.min.js',
             // 'velocity$': 'velocity/velocity.min.js',
