@@ -4,6 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     devtool: 'source-map',
     plugins: [
+        new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
             __DEV__: true,
             __TEST__: false,
@@ -15,7 +16,7 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             filename: 'common.js',
-            minChunks: 2
+            minChunks: 5
         })
     ]
 }
