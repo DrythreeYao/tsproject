@@ -1,9 +1,14 @@
 {
-    "name": "webpack2-demo",
+    "name": "tsproject",
     "version": "1.0.0",
-    "description": "webpack3 typescript vue2 demo",
+    "description": "webpack3 typescript vue2 element-ui demo",
     "main": "index.js",
-    "scripts": {},
+    "scripts": {
+        "dev": "gulp dev",
+        "test": "gulp release --deploy test",
+        "production": "gulp release --deploy production",
+        "server": "gulp webserver"
+    },
     "keywords": [],
     "author": "",
     "license": "ISC",

@@ -12,116 +12,119 @@ const INCLUDE_PATHS = path.resolve(__dirname, './' + SOURCE_CODE_ROOT + '/core')
 module.exports = {
     module: {
         rules: [{
-            enforce: 'pre',
-            test: /\.ts|tsx$/,
-            use: {
-                loader: 'tslint-loader',
-                options: {
-                    // tslint errors are displayed by default as warnings
-                    // set emitErrors to true to display them as errors
-                    emitErrors: true,
-                    // tslint does not interrupt the compilation by default
-                    // if you want any file with tslint errors to fail
-                    // set failOnHint to true
-                    failOnHint: true,
-                    // can specify a custom tsconfig file relative to current directory or with absolute path
-                    // to be used with type checked rules
-                    tsConfigFile: 'tsconfig.json',
-                }
-            }
-        }, {
-            enforce: 'pre',
-            test: /\.js$/,
-            use: {
-                loader: 'eslint-loader',
-                options: {
-                    emitWarning: false, // (default: false) Loader will always return warnings if option is set to true.
-                    failOnWarning: false, // (default: false) Loader will cause the module build to fail if there are any eslint warnings.
-                    failOnError: false // (default: false) Loader will cause the module build to fail if there are any eslint errors.
-                }
-            }
-        }, {
-            test: /\.js$/,
-            use: {
-                loader: 'babel-loader'
-            }
-        }, {
-            test: /\.ts|tsx?$/,
-            use: 'ts-loader'
-        }, {
-            test: /\.css$/,
-            use: [
-                'style-loader', // creates style nodes from JS strings
-                'css-loader', // translates CSS into CommonJS
-                'postcss-loader'
-            ]
-        }, {
-            test: /\.scss$/,
-            include: /(?=.*core)/,
-            use: [
-                'style-loader',
-                {
-                    loader: 'css-loader',
+                enforce: 'pre',
+                test: /\.ts|tsx$/,
+                use: {
+                    loader: 'tslint-loader',
                     options: {
-                        minimize: true,
-                        sourceMap: true
+                        // tslint errors are displayed by default as warnings
+                        // set emitErrors to true to display them as errors
+                        emitErrors: true,
+                        // tslint does not interrupt the compilation by default
+                        // if you want any file with tslint errors to fail
+                        // set failOnHint to true
+                        failOnHint: true,
+                        // can specify a custom tsconfig file relative to current directory or with absolute path
+                        // to be used with type checked rules
+                        tsConfigFile: 'tsconfig.json',
                     }
-                },
-                'postcss-loader',
-                {
-                    loader: 'sass-loader', // compiles Sass to CSS
+                }
+            }, {
+                enforce: 'pre',
+                test: /\.js$/,
+                use: {
+                    loader: 'eslint-loader',
                     options: {
-                        outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'nested',
-                        includePaths: [INCLUDE_PATHS],
-                        sourceMap: true
+                        emitWarning: false, // (default: false) Loader will always return warnings if option is set to true.
+                        failOnWarning: false, // (default: false) Loader will cause the module build to fail if there are any eslint warnings.
+                        failOnError: false // (default: false) Loader will cause the module build to fail if there are any eslint errors.
                     }
                 }
-            ]
-        }, {
-            test: /\.scss$/,
-            // include: /^(?=.*pages)/,
-            use: ExtractTextPlugin.extract({
-                use: [{
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true,
-                            sourceMap: true
+            }, {
+                test: /\.js$/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            }, {
+                test: /\.ts|tsx?$/,
+                use: 'ts-loader'
+            }, {
+                test: /\.css$/,
+                use: [
+                    'style-loader', // creates style nodes from JS strings
+                    'css-loader', // translates CSS into CommonJS
+                    'postcss-loader'
+                ]
+            },
+            //  {
+            //     test: /\.scss$/,
+            //     include: /(?=.*core)/,
+            //     use: [
+            //         'style-loader',
+            //         {
+            //             loader: 'css-loader',
+            //             options: {
+            //                 // minimize: true,
+            //                 sourceMap: true
+            //             }
+            //         },
+            //         'postcss-loader',
+            //         {
+            //             loader: 'sass-loader', // compiles Sass to CSS
+            //             options: {
+            //                 outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'nested',
+            //                 includePaths: [INCLUDE_PATHS],
+            //                 sourceMap: true
+            //             }
+            //         }
+            //     ]
+            // },
+            {
+                test: /\.scss$/,
+                // include: /^(?=.*pages)/,
+                use: ExtractTextPlugin.extract({
+                    use: [{
+                            loader: 'css-loader',
+                            options: {
+                                minimize: true,
+                                sourceMap: true
+                            }
+                        },
+                        'postcss-loader',
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'nested',
+                                includePaths: [INCLUDE_PATHS],
+                                sourceMap: true
+                            }
                         }
-                    },
-                    'postcss-loader',
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'nested',
-                            includePaths: [INCLUDE_PATHS],
-                            sourceMap: true
-                        }
+                    ],
+                    fallback: 'style-loader' // use style-loader extract css file
+                })
+            }, {
+                test: /\.html$/,
+                use: 'html-loader'
+            }, {
+                test: /(\.png)|(\.jpg)|(\.jpeg)|(\.gif)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 7000,
+                        name: 'staticimg/[name].[hash:7].[ext]'
                     }
-                ],
-                fallback: 'style-loader' // use style-loader extract css file
-            })
-        }, {
-            test: /\.html$/,
-            use: 'html-loader'
-        }, {
-            test: /(\.png)|(\.jpg)|(\.jpeg)|(\.gif)$/,
-            use: {
-                loader: 'url-loader',
-                options: {
-                    limit: 7000,
-                    name: 'staticimg/[name].[hash:7].[ext]'
+                }
+            }, {
+                test: /(\.ttf)|(\.eot)|(\.svg)|(\.woff)$/,
+                include: /^(?=.*fonts)/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: 'static/fonts/[name].[hash:7].[ext]'
+                    }
                 }
             }
-        }, {
-            test: /(\.ttf)|(\.eot)|(\.svg)|(\.woff)$/,
-            include: /^(?=.*fonts)/,
-            use: {
-                loader: 'file-loader',
-                options: {
-                    name: 'static/fonts/[name].[hash:7].[ext]'
-                }
-            }
-        }]
+        ]
     },
     resolve: { // 解决路径问题，可简化 alias entry 的路径配置
         modules: [

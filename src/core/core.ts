@@ -146,6 +146,8 @@ Vue.use(Aside)
 Vue.use(Main)
 Vue.use(Footer)
 
+Vue.use(Loading.install)
+
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$alert = MessageBox.alert
