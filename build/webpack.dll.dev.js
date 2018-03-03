@@ -61,9 +61,9 @@ module.exports = {
             'qs/dist/qs.js',
             'axios/dist/axios.min',
             'platform/platform',
-            'store/dist/store.modern.min'
-            // 'core/app.scss' 如果使用了比较大的ui库， 此处可配置， 然后在使用的地方引入lib.css
-        ]
+            'store/dist/store.modern.min',
+            // 'element-ui/lib/index.js'
+        ],
     },
     output: {
         path: path.resolve(__dirname, '../' + WEBPACK_PUBLISH_ROOT),
