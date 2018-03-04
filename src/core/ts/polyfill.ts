@@ -8,21 +8,21 @@ import 'browser-polyfill'
 
 // // 动画兼容
 // if (!window.requestAnimationFrame) {
-//     window.requestAnimationFrame = (window.webkitRequestAnimationFrame ||
-//         window.mozRequestAnimationFrame ||
-//         window.oRequestAnimationFrame ||
-//         window.msRequestAnimationFrame ||
-//         function(callback) {
-//             return window.setTimeout(callback, 1000 / 60);
-//         });
+//   window.requestAnimationFrame = (window.webkitRequestAnimationFrame ||
+//     window.mozRequestAnimationFrame ||
+//     window.oRequestAnimationFrame ||
+//     window.msRequestAnimationFrame ||
+//     function (callback) {
+//       return window.setTimeout(callback, 1000 / 60);
+//     });
 
 // }
 
 // if (!window.cancelAnimationFrame) {
-//     window.cancelAnimationFrame = (window.cancelRequestAnimationFrame ||
-//         window.webkitCancelAnimationFrame || window.webkitCancelRequestAnimationFrame ||
-//         window.mozCancelAnimationFrame || window.mozCancelRequestAnimationFrame ||
-//         window.msCancelAnimationFrame || window.msCancelRequestAnimationFrame ||
-//         window.oCancelAnimationFrame || window.oCancelRequestAnimationFrame ||
-//         window.clearTimeout);
+//   window.cancelAnimationFrame = (window.cancelRequestAnimationFrame ||
+//     window.webkitCancelAnimationFrame || window.webkitCancelRequestAnimationFrame ||
+//     window.mozCancelAnimationFrame || window.mozCancelRequestAnimationFrame ||
+//     window.msCancelAnimationFrame || window.msCancelRequestAnimationFrame ||
+//     window.oCancelAnimationFrame || window.oCancelRequestAnimationFrame ||
+//     window.clearTimeout);
 // }

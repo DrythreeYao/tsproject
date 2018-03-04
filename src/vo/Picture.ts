@@ -2,6 +2,6 @@
  * 图片
  */
 export interface Picture {
-    id: number,
-    url: string,
+  id: number,
+  url: string,
 }

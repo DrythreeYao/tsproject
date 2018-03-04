@@ -5,14 +5,13 @@
 /// @group API
 /// @author undefined
 ////
-
 /// Slightly lighten a color
 /// @access public
 /// @param {Color} $color - color to tint
 /// @param {Number} $percentage - percentage of `$color` in returned color
 /// @return {Color}
 @function tint($color, $percentage) {
-    @return mix($color, white, $percentage);
+  @return mix($color, white, $percentage);
 }
 
 /// Slightly darken a color
@@ -21,5 +20,5 @@
 /// @param {Number} $percentage - percentage of `$color` in returned color
 /// @return {Color}
 @function shade($color, $percentage) {
-    @return mix($color, black, $percentage);
+  @return mix($color, black, $percentage);
 }

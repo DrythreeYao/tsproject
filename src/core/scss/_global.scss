@@ -5,56 +5,61 @@
 /// @group common
 /// @author xjq
 ////
-
 // atomic classes (原子类)
 .oh {
-    overflow: hidden;
+  overflow: hidden;
 }
+
 .fl {
-    float: left;
+  float: left;
 }
+
 .fr {
-    float: right;
+  float: right;
 }
+
 .rel {
-    position: relative;
+  position: relative;
 }
+
 .abs {
-    position: absolute;
+  position: absolute;
 }
+
 .pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
+
 .line-through {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
+
 .underline {
-    text-decoration: underline;
+  text-decoration: underline;
 }
+
 .hide {
-    display: none;
+  display: none;
 }
+
 .show {
-    display: block;
+  display: block;
 }
 
 // clear float (清浮动)
 .clear {
-    font-size: 0;
-
-    clear: both;
-    overflow: hidden;
-
-    height: 0;
+  font-size: 0;
+  clear: both;
+  overflow: hidden;
+  height: 0;
 }
+
 .clearfix {
-    zoom: 1;
-    &::after {
-        display: block;
-        clear: both;
-
-        height: 0;
-
-        content: '\0020';
-    }
+  zoom: 1;
+  &::after {
+    display: block;
+    clear: both;
+    height: 0;
+    content: '\0020';
+  }
 }

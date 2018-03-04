@@ -5,9 +5,9 @@
 - [node](https://nodejs.org/en/) 点击下载node
 - [gulp](https://github.com/gulpjs/gulp) 构建工具介绍
 - [sass](http://www.w3cplus.com/sassguide/syntax.html) Sass入门语法
-- [es6 ](http://es6.ruanyifeng.com/) ECMAScript 6 入门
-- [ts  ](https://www.tslang.cn/docs/home.html) TypeScript文档
-- [vue ](https://cn.vuejs.org/v2/guide/) vue入门指南
+- [es6](http://es6.ruanyifeng.com/) ECMAScript 6 入门
+- [ts](https://www.tslang.cn/docs/home.html) TypeScript文档
+- [vue](https://cn.vuejs.org/v2/guide/) vue入门指南
 
 ## 运行项目
 

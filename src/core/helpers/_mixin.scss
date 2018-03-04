@@ -1,5 +1,4 @@
 @charset 'utf-8';
-
 ////
 /// 混入类
 /// 混入类用于输出一段通用的 CSS 片段。
@@ -8,7 +7,6 @@
 /// @group API
 /// @author undefined
 ////
-
 /// 清除元素内浮动
 /// @example scss - 使用
 ///     .box {
@@ -25,15 +23,14 @@
 ///       clear: both;
 ///     }
 @mixin clearfix() {
-    &:before,
-    &:after {
-        display: table;
-
-        content: ' ';
-    }
-    &:after {
-        clear: both;
-    }
+  &:before,
+  &:after {
+    display: table;
+    content: ' ';
+  }
+  &:after {
+    clear: both;
+  }
 }
 
 /// 单行文字超出部分使用...
@@ -49,10 +46,9 @@
 ///         white-space: nowrap;
 ///     }
 @mixin text-ellipsis() {
-    overflow: hidden;
-
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /// 透明度
@@ -68,9 +64,8 @@
 ///         filter: alpha(opacity=$opacity * 10);
 ///     }
 @mixin opacity($opacity: 0) {
-    opacity: $opacity;
-
-    filter: alpha(opacity=$opacity * 100);
+  opacity: $opacity;
+  filter: alpha(opacity=$opacity * 100);
 }
 
 /// 设置元素的宽度及高度
@@ -107,8 +102,8 @@
 ///         height: 20px;
 ///     }
 @mixin size($width, $height: $width) {
-    width: $width;
-    height: $height;
+  width: $width;
+  height: $height;
 }
 
 /// 设置元素盒模型
@@ -121,48 +116,40 @@
 /// @param {Length}[null] $line-height - 文字行高
 /// @param {Length}[null] $border-width - 边框宽度
 /// @param {Length}[null] $border-radius - 圆角
-@mixin element-box(
-        $width: null,
-        $height: null,
-        $padding-vertical: null,
-        $padding-horizontal: null,
-        $border-width: null,
-        $border-radius: null,
-        $font-size: null,
-        $line-height: null ) {
-    @if $width {
-        width: $width;
+@mixin element-box( $width: null, $height: null, $padding-vertical: null, $padding-horizontal: null, $border-width: null, $border-radius: null, $font-size: null, $line-height: null) {
+  @if $width {
+    width: $width;
+  }
+  @if $height {
+    height: $height;
+  }
+  @if $padding-vertical and $padding-horizontal {
+    padding: $padding-vertical $padding-horizontal;
+  }
+  @else if $padding-vertical {
+    padding: {
+      top: $padding-vertical;
+      bottom: $padding-vertical;
     }
-    @if $height {
-        height: $height;
+  }
+  @else if $padding-horizontal {
+    padding: {
+      right: $padding-horizontal;
+      left: $padding-horizontal;
     }
-    @if $padding-vertical and $padding-horizontal {
-        padding: $padding-vertical $padding-horizontal;
-    }
-    @else if $padding-vertical {
-        padding:  {
-            top: $padding-vertical;
-            bottom: $padding-vertical;
-        }
-    }
-    @else if $padding-horizontal {
-        padding:  {
-            right: $padding-horizontal;
-            left: $padding-horizontal;
-        }
-    }
-    @if $font-size {
-        font-size: $font-size;
-    }
-    @if $line-height {
-        line-height: $line-height;
-    }
-    @if $border-width {
-        border-width: $border-width;
-    }
-    @if $border-radius {
-        border-radius: $border-radius;
-    }
+  }
+  @if $font-size {
+    font-size: $font-size;
+  }
+  @if $line-height {
+    line-height: $line-height;
+  }
+  @if $border-width {
+    border-width: $border-width;
+  }
+  @if $border-radius {
+    border-radius: $border-radius;
+  }
 }
 
 /// 按钮基本风格
@@ -174,22 +161,18 @@
 /// @example css - 输出
 ///     ...
 @mixin button-style($bg-color, $border-color, $color, $active-bg-color: $bg-color, $active-border-color: $bg-color) {
+  color: $color;
+  border-color: $border-color;
+  background-color: $bg-color; // Give desktop users something to play with
+  &:hover {
+    text-decoration: none;
     color: $color;
-    border-color: $border-color;
-    background-color: $bg-color;
-
-    // Give desktop users something to play with
-    &:hover {
-        text-decoration: none;
-
-        color: $color;
-    }
-    // &.active,
-    // &.activated {
-    //     border-color: $active-border-color;
-    //     background-color: $active-bg-color;
-    //     box-shadow: inset 0 1px 4px rgba(0,0,0,.1);
-    // }
+  } // &.active,
+  // &.activated {
+  //     border-color: $active-border-color;
+  //     background-color: $active-bg-color;
+  //     box-shadow: inset 0 1px 4px rgba(0,0,0,.1);
+  // }
 }
 
 /// 按钮无边框风格
@@ -201,12 +184,11 @@
 /// @example css - 输出
 ///     ...
 @mixin button-clear($color) {
-    &.button-clear {
-        color: $color;
-        border-color: transparent;
-        background: none;
-        // box-shadow: none;
-    }
+  &.button-clear {
+    color: $color;
+    border-color: transparent;
+    background: none; // box-shadow: none;
+  }
 }
 
 /// 按钮有边框风格
@@ -218,17 +200,15 @@
 /// @example css - 输出
 ///     ...
 @mixin button-outline($bg-color, $border-color, $color, $active-bg-color: $bg-color, $active-border-color: $bg-color) {
-    &.button-outline {
-        color: $color;
-        border-color: $border-color;
-        background: $bg-color;
-        // box-shadow: none;
-
-        // &.active,
-        // &.activated {
-        //     color: #fff;
-        //     background-color: $color;
-        //     box-shadow: none;
-        // }
-    }
+  &.button-outline {
+    color: $color;
+    border-color: $border-color;
+    background: $bg-color; // box-shadow: none;
+    // &.active,
+    // &.activated {
+    //     color: #fff;
+    //     background-color: $color;
+    //     box-shadow: none;
+    // }
+  }
 }
