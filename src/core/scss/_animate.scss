@@ -7,6 +7,7 @@
 ////
 .animated {
   animation-duration: 1s;
+
   animation-fill-mode: both;
 }
 
@@ -50,10 +51,12 @@
 @keyframes fadeInDown {
   from {
     transform: translate3d(0, -100%, 0);
+
     opacity: 0;
   }
   to {
     transform: none;
+
     opacity: 1;
   }
 }
@@ -69,6 +72,7 @@
   }
   to {
     transform: translate3d(0, -100%, 0);
+
     opacity: 0;
   }
 }

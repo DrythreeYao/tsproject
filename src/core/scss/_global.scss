@@ -49,8 +49,10 @@
 // clear float (清浮动)
 .clear {
   font-size: 0;
+
   clear: both;
   overflow: hidden;
+
   height: 0;
 }
 
@@ -59,7 +61,9 @@
   &::after {
     display: block;
     clear: both;
+
     height: 0;
+
     content: '\0020';
   }
 }
