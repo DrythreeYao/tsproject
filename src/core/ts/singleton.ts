@@ -13,7 +13,7 @@ class Singleton {
    * @return {Config}
    */
   static getInstance(SingleClass: any): any {
-    let instance = null
+    let instance
     if (!Singleton.instanceCache) {
       Singleton.instanceCache = new Map<Function, object>()
     }

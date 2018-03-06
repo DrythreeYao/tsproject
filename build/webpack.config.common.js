@@ -13,7 +13,7 @@ module.exports = {
   module: {
     rules: [{
       enforce: 'pre',
-      test: /\.ts|tsx$/,
+      test: /\.ts(x)$/,
       use: {
         loader: 'tslint-loader',
         options: {
@@ -43,13 +43,33 @@ module.exports = {
     }, {
       test: /\.js$/,
       use: {
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       }
     }, {
-      test: /\.ts|tsx?$/,
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      // options: {
+      //   loaders: {
+      //     ts: 'ts-loader',
+      //     tsx: 'babel-loader!ts-loader',
+      //     scss: [
+      //       'vue-style-loader',
+      //       'css-loader',
+      //       'postcss-loader',
+      //       'sass-loader',
+      //     ]
+      //   }
+      // }
+    }, {
+      test: /\.ts(x)?$/,
       use: [
         // 'babel-loader',
-        'ts-loader'
+        {
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/]
+          }
+        }
       ]
     }, {
       test: /\.css$/,
@@ -121,7 +141,7 @@ module.exports = {
       path.join(__dirname, '../node_modules'),
       path.join(__dirname, '../' + SOURCE_CODE_ROOT)
     ],
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.vue'],
     alias: {
       // 'element-ui': 'element-ui/lib/index.js',
       'browser-polyfill$': 'babel-polyfill/browser.js',
@@ -145,14 +165,15 @@ module.exports = {
   },
   entry: {
     'common': [
-      'core/ts/app',
-      'core/ts/config',
-      'core/ts/constants',
-      'core/ts/tools',
+      'core/ts/app.ts',
+      'core/ts/config.ts',
+      'core/ts/constants.ts',
+      'core/ts/tools.ts',
     ],
-    'core': 'core/core',
-    'index/index': 'pages/index/index', // 入口页
-    'demo/demo': 'pages/demo/demo', // demo
+    'core': 'core/core.ts',
+    'router': 'core/router.ts', // 单页应用 需要引入路由
+    'index': 'index.ts', // 单页入口
+    'demo/demo': 'pages/demo/demo.ts', // 多页demo
   },
   output: {
     path: path.join(__dirname, '../' + WEBPACK_PUBLISH_ROOT),

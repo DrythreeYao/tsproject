@@ -1,0 +1,12 @@
+{
+  "data": [{
+    "name": "艺典拍",
+    "menus": [{
+      "name": "Go to Foo",
+      "link": "/foo"
+    }, {
+      "name": "Go to Bar",
+      "link": "/bar"
+    }]
+  }]
+}

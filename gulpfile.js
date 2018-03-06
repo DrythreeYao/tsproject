@@ -44,8 +44,8 @@ gulp.task('webserver', function() {
         callback(!/\.svn/.test(fileName))
       }
     },
-    defaultFile: './pages/index/index.html',
-    fallback: './pages/index/index.html',
+    defaultFile: './index.html',
+    fallback: './index.html',
     // directoryListing: true,
     open: true,
     port: 8081
