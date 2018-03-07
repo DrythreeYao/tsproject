@@ -1,5 +1,5 @@
 import * as constants from './constants'
-import tools from './tools'
+import utils from './utils'
 import platform from 'platform'
 import store from 'store'
 
@@ -82,14 +82,14 @@ class App {
     if (platform.product === null) {
       appInfo.device = constants.DEVICE.WEB_PC
     } else {
-      if (tools.isWeChatBrowser()) {
+      if (utils.isWeChatBrowser()) {
         appInfo.device = constants.DEVICE.WEB_WECHAT
       } else {
         appInfo.device = constants.DEVICE.WEB_MOBILE
       }
     }
     this.setAppInfo(appInfo)
-    // tools.log('initAppInfo ' + JSON.stringify(this.getAppInfo()))
+    // utils.log('initAppInfo ' + JSON.stringify(this.getAppInfo()))
   }
 
   /**
@@ -103,7 +103,7 @@ class App {
         this.storageUser(this.getUser())
       }
     }
-    // tools.log('initUser ' + JSON.stringify(this.getUser()))
+    // utils.log('initUser ' + JSON.stringify(this.getUser()))
   }
 
   /**
@@ -120,7 +120,7 @@ class App {
         this.storageAppSetting(appSetting)
       }
     }
-    // tools.log('initAppSetting ' + JSON.stringify(this.getAppSetting()))
+    // utils.log('initAppSetting ' + JSON.stringify(this.getAppSetting()))
   }
 
   /**
@@ -198,5 +198,5 @@ let app: App = new App()
 export {
   app,
   constants,
-  tools
+  utils
 }

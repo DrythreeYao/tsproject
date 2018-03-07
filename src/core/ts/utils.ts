@@ -1,4 +1,4 @@
-class Tools {
+class Utils {
   /**
    * 判断是否是微信应用中的浏览器
    */
@@ -58,6 +58,6 @@ class Tools {
   }
 }
 
-let tools: Tools = new Tools()
+let utils: Utils = new Utils()
 
-export default tools
+export default utils

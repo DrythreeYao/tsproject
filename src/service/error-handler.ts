@@ -1,4 +1,4 @@
-import { constants, tools } from '../core/ts/app';
+import { constants, utils } from '../core/ts/app';
 import { AxiosError } from 'axios'
 
 /**
@@ -67,7 +67,7 @@ function errorResponse(err: AxiosError, errorHandler: ErrorHandler) {
     errorHandler.network && errorHandler.network()
   } else {
     // TODO 此处脚本异常
-    tools.log(constants.ERROR_MESSAGE.get(constants.ERROR.JS_EXCEPTION) + ' ' + err.stack, 'red')
+    utils.log(constants.ERROR_MESSAGE.get(constants.ERROR.JS_EXCEPTION) + ' ' + err.stack, 'red')
   }
 }
 

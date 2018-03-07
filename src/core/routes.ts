@@ -14,6 +14,7 @@ const Bar = { template: '<div>bar</div>' }
 // 或者，只是一个组件配置对象。
 // 我们晚点再讨论嵌套路由。
 const routes = [
+  { path: '/yd-auction', component: () => import('../pages/yd-auction/yd-auction.vue') },
   { path: '/foo', component: Foo },
   { path: '/bar', component: Bar },
 ]

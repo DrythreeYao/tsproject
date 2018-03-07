@@ -1,12 +1,5 @@
 <template>
-<div>
-<!-- 使用 router-link 组件来导航. -->
-<!-- 通过传入 `to` 属性指定链接. -->
-<!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
-<!-- <router-link to="/foo">Go to Foo</router-link> -->
-<!-- <router-link to="/bar">Go to Bar</router-link> -->
-<el-row>
-  <el-col :span="24" class="my-col">
+<div class="my-menu-container">
     <!-- <el-radio-group v-model="isCollapse">
       <el-radio-button :label="false"><i class="el-icon-d-arrow-left"></i></el-radio-button>
       <el-radio-button :label="true"><i class="el-icon-d-arrow-right"></i></el-radio-button>
@@ -16,7 +9,7 @@
       <el-button type="text" icon="el-icon-d-arrow-right" v-if="isCollapse"></el-button>
     </h3>
     <el-menu
-      default-active="1"
+      default-active="home"
       class="my-menu"
       @open="handleOpen"
       @close="handleClose"
@@ -26,25 +19,29 @@
       text-color="#bdbdbd"
       active-text-color="#fff">
 
-      <el-menu-item index="1">
+      <el-menu-item index="home">
         <i class="el-icon-menu"></i>
         <span slot="title">首页</span>
       </el-menu-item>
 
-      <el-submenu :index="i + 2 + ''" v-for="(menu, i) in menus" :key="i">
+      <el-submenu :index="i + ''" v-for="(menu, i) in menus" :key="i">
         <template slot="title">
           <i class="el-icon-menu"></i>
           <span>{{menu.name}}</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item :index="(i + 2) + '-' + j" v-for="(subMenu, j) in menu.menus" :key="j">
-            <router-link :to="subMenu.link">{{subMenu.name}}</router-link>
+          <el-menu-item :index="subMenu.link" v-for="(subMenu, j) in menu.menus" :key="j">
+            <!-- 使用 router-link 组件来导航. -->
+            <!-- 通过传入 `to` 属性指定链接. -->
+            <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+            <!-- <router-link to="/foo">Go to Foo</router-link> -->
+            <!-- <router-link to="/bar">Go to Bar</router-link> -->
+            <!-- <router-link :to="subMenu.link">{{subMenu.name}}</router-link> -->
+            {{subMenu.name}}
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
-  </el-col>
-</el-row>
 </div>
 </template>
 
@@ -53,7 +50,6 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class MyMenu extends Vue {
-  name = "MyMenu";
   isCollapse = false;
   menus = [];
 
@@ -70,6 +66,7 @@ export default class MyMenu extends Vue {
   }
   handleSelect(key, keyPath) {
     console.log(key, keyPath);
+    this.$router.push(key);
   }
   toggleMenu() {
     this.isCollapse = !this.isCollapse;
@@ -82,6 +79,9 @@ export default class MyMenu extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.my-menu-container {
+  background-color: #545c64;
+}
 .my-menu-toggle {
   padding-left: 10px;
 
@@ -98,22 +98,6 @@ export default class MyMenu extends Vue {
   &:not(.el-menu--collapse) {
     width: 224px;
     min-height: 400px;
-  }
-  .el-menu-item {
-    a {
-      margin: 0 -40px;
-      padding-left: 40px;
-      display: block;
-
-      text-decoration: none;
-
-      color: #bdbdbd;
-    }
-    &.is-active {
-      a {
-        color: #fff;
-      }
-    }
   }
 }
 </style>

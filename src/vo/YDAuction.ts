@@ -1,10 +1,10 @@
 import { constants } from '../core/ts/app';
-import { Picture } from './Picture';
+import Picture from './Picture';
 
 /**
  * 艺典同步拍拍场
  */
-export interface YDAuction {
+export default interface YDAuction {
   activeStatus: constants.YD_AUCTION_STATUS
   auctionType: constants.AUCTION_TYPE
   beginTime: number

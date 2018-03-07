@@ -48,18 +48,32 @@ module.exports = {
     }, {
       test: /\.vue$/,
       loader: 'vue-loader',
-      // options: {
-      //   loaders: {
-      //     ts: 'ts-loader',
-      //     tsx: 'babel-loader!ts-loader',
-      //     scss: [
-      //       'vue-style-loader',
-      //       'css-loader',
-      //       'postcss-loader',
-      //       'sass-loader',
-      //     ]
-      //   }
-      // }
+      // 若不配置options，vue-loader会使用默认处理方式
+      options: {
+        loaders: {
+          // ts: 'ts-loader',
+          // tsx: 'babel-loader!ts-loader',
+          scss: [
+            'vue-style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                minimize: true,
+                sourceMap: true
+              }
+            },
+            'postcss-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'nested',
+                includePaths: [INCLUDE_PATHS],
+                sourceMap: true
+              }
+            },
+          ]
+        }
+      }
     }, {
       test: /\.ts(x)?$/,
       use: [
@@ -168,10 +182,16 @@ module.exports = {
       'core/ts/app.ts',
       'core/ts/config.ts',
       'core/ts/constants.ts',
-      'core/ts/tools.ts',
+      'core/ts/vo.ts',
+      'core/ts/utils.ts',
+      'service/api.ts',
+      'service/error-handler.ts',
+      'vue-class-component',
+      'vue-property-decorator',
+      'css-loader/lib/css-base.js',
     ],
     'core': 'core/core.ts',
-    'router': 'core/router.ts', // 单页应用 需要引入路由
+    'routes': 'core/routes.ts', // 单页应用 需要引入路由
     'index': 'index.ts', // 单页入口
     'demo/demo': 'pages/demo/demo.ts', // 多页demo
   },

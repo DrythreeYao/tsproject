@@ -1,4 +1,4 @@
-import { constants, tools } from './app'
+import { constants, utils } from './app'
 declare let __DEV__: any
 declare let __TEST__: any
 declare let __PRODUCTION__: any
@@ -34,7 +34,7 @@ class Config {
    */
   init() {
     if (__DEV__) {
-      tools.log('Current operating environment is DEV')
+      utils.log('Current operating environment is DEV')
       this.setEnv({
         service: 'http://www.yidianchina.com/',
         domain: 'http://www.yidianchina.com/',
@@ -42,7 +42,7 @@ class Config {
       })
     }
     if (__TEST__) {
-      tools.log('Current operating environment is TEST')
+      utils.log('Current operating environment is TEST')
       this.setEnv({
         service: 'http://www.yidianchina.com/',
         domain: 'http://www.yidianchina.com/',
@@ -50,7 +50,7 @@ class Config {
       })
     }
     if (__PRODUCTION__) {
-      tools.log('Current operating environment is PRODUCTION')
+      utils.log('Current operating environment is PRODUCTION')
       this.setEnv({
         service: 'http://www.somename.com/api',
         domain: 'http://www.somename.com',

@@ -1,6 +1,6 @@
 import { constants } from '../core/ts/app';
 import apiService from './api';
-import { YDAuction } from '../vo/YDAuction';
+import { YDAuction } from '../core/ts/vo';
 
 /**
  * 艺典拍业务

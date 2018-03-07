@@ -3,21 +3,16 @@
  */
 
 // 通用样式
-
 // import 'element-ui/lib/theme-chalk/index.css'
+import 'browser-polyfill'
 import Vue from 'vue'
 import Element from 'element-ui'
 import './core.scss'
 
-import './ts/polyfill'
 import config from './ts/config'
 import { app } from './ts/app'
+import apiService from '../service/api';
 
-// 初始化环境配置
-config.init()
-app.init()
-
-// 初始化ui
 import {
   Pagination,
   Dialog,
@@ -86,6 +81,12 @@ import {
   Notification
 } from 'element-ui'
 
+// 初始化环境信息
+config.init()
+apiService.init()
+app.init()
+
+// 初始化ui
 Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.use(Autocomplete)
@@ -156,3 +157,4 @@ Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$prompt = MessageBox.prompt
 Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message
+

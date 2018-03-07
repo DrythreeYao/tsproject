@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import MyHeader from './layout/header.vue'
-import MyFooter from './layout/footer.vue'
-import MyMenu from './layout/menu.vue'
+import MyHeader from './layouts/backend/standard/header.vue'
+import MyFooter from './layouts/backend/standard/footer.vue'
+import MyMenu from './layouts/backend/standard/menu.vue'
 
-Vue.component(MyHeader.name, MyHeader);
-Vue.component(MyFooter.name, MyFooter);
-Vue.component(MyMenu.name, MyMenu);
+Vue.component('my-header', MyHeader);
+Vue.component('my-footer', MyFooter);
+Vue.component('my-menu', MyMenu);

@@ -24,14 +24,12 @@ export interface ServerData {
  * 异步基础函数
  */
 class ApiService {
-  constructor() {
-    this.init()
-  }
+  constructor() { }
 
   /**
    * 初始化
    */
-  private init(): void {
+  init(): void {
     axios.defaults.baseURL = config.getEvn().service
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 

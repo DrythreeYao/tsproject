@@ -2,6 +2,9 @@
   "data": [{
     "name": "艺典拍",
     "menus": [{
+      "name": "拍场管理",
+      "link": "/yd-auction"
+    }, {
       "name": "Go to Foo",
       "link": "/foo"
     }, {

@@ -1,7 +1,7 @@
 /**
  * 图片
  */
-export interface Picture {
+export default interface Picture {
   id: number,
   url: string,
 }

@@ -1,11 +1,11 @@
 import './demo.scss'
-import { tools, constants, app } from '../../core/ts/app';
+import { utils, constants, app } from '../../core/ts/app';
 import ydAuctionService from '../../service/yd-auction';
 import Vue from 'vue';
 import errorHandler from '../../service/error-handler';
-import { YDAuction } from '../../vo/YDAuction';
 
 import MyHello from './hello';
+import { YDAuction } from '../../core/ts/vo';
 // Vue.component(MyHello.name, MyHello);
 
 let vm = new Vue({
@@ -60,7 +60,7 @@ let vm = new Vue({
       let auctionList = data.result
       let auction: YDAuction
       for (auction of auctionList) {
-        tools.log(auction.customProperty)
+        utils.log(auction.customProperty)
         // auction.name = '改变数据'
       }
       this.auctionList = auctionList
