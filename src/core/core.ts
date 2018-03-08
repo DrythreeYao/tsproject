@@ -11,7 +11,7 @@ import './core.scss'
 
 import config from './ts/config'
 import { app } from './ts/app'
-import apiService from '../service/api';
+import apiService from '../services/api';
 
 import {
   Pagination,

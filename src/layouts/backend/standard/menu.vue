@@ -1,47 +1,47 @@
 <template>
 <div class="my-menu-container">
-    <!-- <el-radio-group v-model="isCollapse">
-      <el-radio-button :label="false"><i class="el-icon-d-arrow-left"></i></el-radio-button>
-      <el-radio-button :label="true"><i class="el-icon-d-arrow-right"></i></el-radio-button>
-    </el-radio-group> -->
-    <h3 class="my-menu-toggle">
-      <el-button type="text" icon="el-icon-d-arrow-left" v-if="!isCollapse" @click="toggleMenu"></el-button>
-      <el-button type="text" icon="el-icon-d-arrow-right" v-if="isCollapse"></el-button>
-    </h3>
-    <el-menu
-      default-active="home"
-      class="my-menu"
-      @open="handleOpen"
-      @close="handleClose"
-      @select="handleSelect"
-      :collapse="isCollapse"
-      background-color="#545c64"
-      text-color="#bdbdbd"
-      active-text-color="#fff">
+  <!-- <el-radio-group v-model="isCollapse">
+    <el-radio-button :label="false"><i class="el-icon-d-arrow-left"></i></el-radio-button>
+    <el-radio-button :label="true"><i class="el-icon-d-arrow-right"></i></el-radio-button>
+  </el-radio-group> -->
+  <h3 class="my-menu-toggle">
+    <el-button type="text" icon="el-icon-d-arrow-left" v-if="!isCollapse" @click="toggleMenu"></el-button>
+    <el-button type="text" icon="el-icon-d-arrow-right" v-if="isCollapse"></el-button>
+  </h3>
+  <el-menu
+    default-active="home"
+    class="my-menu"
+    @open="handleOpen"
+    @close="handleClose"
+    @select="handleSelect"
+    :collapse="isCollapse"
+    background-color="#545c64"
+    text-color="#bdbdbd"
+    active-text-color="#fff">
 
-      <el-menu-item index="home">
+    <el-menu-item index="home">
+      <i class="el-icon-menu"></i>
+      <span slot="title">首页</span>
+    </el-menu-item>
+
+    <el-submenu :index="i + ''" v-for="(menu, i) in menus" :key="i">
+      <template slot="title">
         <i class="el-icon-menu"></i>
-        <span slot="title">首页</span>
-      </el-menu-item>
-
-      <el-submenu :index="i + ''" v-for="(menu, i) in menus" :key="i">
-        <template slot="title">
-          <i class="el-icon-menu"></i>
-          <span>{{menu.name}}</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item :index="subMenu.link" v-for="(subMenu, j) in menu.menus" :key="j">
-            <!-- 使用 router-link 组件来导航. -->
-            <!-- 通过传入 `to` 属性指定链接. -->
-            <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
-            <!-- <router-link to="/foo">Go to Foo</router-link> -->
-            <!-- <router-link to="/bar">Go to Bar</router-link> -->
-            <!-- <router-link :to="subMenu.link">{{subMenu.name}}</router-link> -->
-            {{subMenu.name}}
-          </el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-    </el-menu>
+        <span>{{menu.name}}</span>
+      </template>
+      <el-menu-item-group>
+        <el-menu-item :index="subMenu.link" v-for="(subMenu, j) in menu.menus" :key="j">
+          <!-- 使用 router-link 组件来导航. -->
+          <!-- 通过传入 `to` 属性指定链接. -->
+          <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+          <!-- <router-link to="/foo">Go to Foo</router-link> -->
+          <!-- <router-link to="/bar">Go to Bar</router-link> -->
+          <!-- <router-link :to="subMenu.link">{{subMenu.name}}</router-link> -->
+          {{subMenu.name}}
+        </el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+  </el-menu>
 </div>
 </template>
 

@@ -51,7 +51,7 @@ module.exports = {
       // 若不配置options，vue-loader会使用默认处理方式
       options: {
         loaders: {
-          // ts: 'ts-loader',
+          ts: 'ts-loader',
           // tsx: 'babel-loader!ts-loader',
           scss: [
             'vue-style-loader',
@@ -184,8 +184,8 @@ module.exports = {
       'core/ts/constants.ts',
       'core/ts/vo.ts',
       'core/ts/utils.ts',
-      'service/api.ts',
-      'service/error-handler.ts',
+      'services/api.ts',
+      'services/error-handler.ts',
       'vue-class-component',
       'vue-property-decorator',
       'css-loader/lib/css-base.js',

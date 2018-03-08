@@ -1,11 +1,10 @@
 import './demo.scss'
-import { utils, constants, app } from '../../core/ts/app';
-import ydAuctionService from '../../service/yd-auction';
-import Vue from 'vue';
-import errorHandler from '../../service/error-handler';
+import { Vue, Component, Prop } from "vue-property-decorator";
+import { utils, constants, app } from "../../core/ts/app";
+import { errorHandler, ydAuctionService } from "../../core/ts/services";
+import { YDAuction } from "../../core/ts/vo";
 
-import MyHello from './hello';
-import { YDAuction } from '../../core/ts/vo';
+import MyHello from './hello.vue';
 // Vue.component(MyHello.name, MyHello);
 
 let vm = new Vue({

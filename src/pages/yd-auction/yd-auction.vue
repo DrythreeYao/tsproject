@@ -19,8 +19,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { utils, constants, app } from "../../core/ts/app";
-import ydAuctionService from "../../service/yd-auction";
-import errorHandler from "../../service/error-handler";
+import { errorHandler, ydAuctionService } from "../../core/ts/services";
 import { YDAuction } from "src/core/ts/vo";
 
 @Component
@@ -81,7 +80,7 @@ export default class MyComponent extends Vue {
     let auctionList = data.result;
     let auction: YDAuction;
     for (auction of auctionList) {
-      utils.log(auction.customProperty);
+      // utils.log(auction.customProperty);
       // auction.name = '改变数据'
     }
     this.auctionList = auctionList;
@@ -102,4 +101,5 @@ export default class MyComponent extends Vue {
 .box-card {
   width: 480px;
 }
+
 </style>
