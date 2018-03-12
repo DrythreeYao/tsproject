@@ -15,7 +15,9 @@
   <div id="app">
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
-    <router-view></router-view>
+    <transition name="fade">
+      <router-view></router-view>
+    </transition>
   </div>
   <script src="/assets/common.js"></script>
   <script src="/assets/core.js"></script>

@@ -36,7 +36,8 @@ const routes = [
       next()
     },
     children: [
-      { name: '', path: '', component: () => import('../pages/home/home.vue') },
+      // { name: '', path: '', component: () => import('../pages/home/home.vue') },
+      { name: '', path: '', redirect: { name: 'yd-auction/list' } },
       { name: 'yd-auction/list', path: 'yd-auction/list', component: () => import('../pages/yd-auction/list/list.vue') },
       { name: 'yd-auction/detail', path: 'yd-auction/detail', component: () => import('../pages/yd-auction/detail/detail.vue') },
     ],

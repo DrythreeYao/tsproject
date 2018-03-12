@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import { utils, constants, app } from "../../../core/ts/app";
 import { errorHandler, ydAuctionService } from "../../../core/ts/services";
 import { YDAuction } from "src/core/ts/vo";
@@ -31,6 +31,8 @@ export default class MyComponent extends Vue {
   auctionList = [];
   multipleSelection = [];
 
+  @Prop({ default: 0 })
+  enterCounter?: number;
   @Prop({ default: "1" })
   activeStatus?: string;
 
@@ -38,8 +40,11 @@ export default class MyComponent extends Vue {
     super();
     setTimeout(() => this.init());
   }
-
   init() {
+    this.findYDAuctions();
+  }
+  @Watch("enterCounter")
+  onBeforeRouteUpdate() {
     this.findYDAuctions();
   }
   handleSelectionChange(rows: any) {

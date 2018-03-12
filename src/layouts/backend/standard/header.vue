@@ -74,7 +74,7 @@ export default class MyComponent extends Vue {
   async doGetUserInfo() {
     let res = await passportService.getUserInfo();
     let data = res.data.data;
-    console.log(this.$router);
+
     if (!data.whetherLogin) {
       this.goLogin();
     } else {
