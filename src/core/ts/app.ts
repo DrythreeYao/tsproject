@@ -2,6 +2,7 @@ import * as constants from './constants'
 import utils from './utils'
 import platform from 'platform'
 import store from 'store'
+import { passportService } from './services';
 
 /**
  * 登录用户信息

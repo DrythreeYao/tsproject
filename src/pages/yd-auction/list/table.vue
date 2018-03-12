@@ -18,8 +18,8 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { utils, constants, app } from "../../core/ts/app";
-import { errorHandler, ydAuctionService } from "../../core/ts/services";
+import { utils, constants, app } from "../../../core/ts/app";
+import { errorHandler, ydAuctionService } from "../../../core/ts/services";
 import { YDAuction } from "src/core/ts/vo";
 
 @Component
@@ -30,6 +30,9 @@ export default class MyComponent extends Vue {
   pageSize = 10;
   auctionList = [];
   multipleSelection = [];
+
+  @Prop({ default: "1" })
+  activeStatus?: string;
 
   constructor() {
     super();
@@ -68,11 +71,29 @@ export default class MyComponent extends Vue {
         this.loading = false;
       });
   }
+  getActiveStatus() {
+    let status: number = constants.YD_AUCTION_STATUS.ALL;
+    switch (this.activeStatus) {
+      case "1":
+        status = constants.YD_AUCTION_STATUS.ALL;
+        break;
+      case "2":
+        status = constants.YD_AUCTION_STATUS.PROCESSING;
+        break;
+      case "3":
+        status = constants.YD_AUCTION_STATUS.UNPROCESSING;
+        break;
+      case "4":
+        status = constants.YD_AUCTION_STATUS.END;
+        break;
+      default:
+        break;
+    }
+    return status;
+  }
   async doFindYDAuctions() {
-    console.log("pageSize", this.pageSize);
-
     let res = await ydAuctionService.findYDAuctions(
-      constants.YD_AUCTION_STATUS.ALL,
+      this.getActiveStatus(),
       this.pageNum,
       this.pageSize
     );
@@ -89,17 +110,16 @@ export default class MyComponent extends Vue {
 }
 </script>
 
-<style scoped>
-.text {
-  font-size: 14px;
-}
-
+<style lang="scss" scoped>
 .item {
   padding: 18px 0;
 }
 
 .box-card {
   width: 480px;
+}
+.el-pagination {
+  margin-top: 15px;
 }
 
 </style>

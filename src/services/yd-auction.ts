@@ -37,5 +37,4 @@ class YDAuctionService {
   }
 }
 
-let ydAuctionService: YDAuctionService = new YDAuctionService()
-export default ydAuctionService
+export default new YDAuctionService()

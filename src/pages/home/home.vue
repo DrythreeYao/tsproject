@@ -1,24 +1,18 @@
 <template>
-  <div class="my-footer">
-    2015 &copy; 艺典中国.
+  <div>
+    Welcome Home
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import { utils, constants, app } from "../../core/ts/app";
+import { errorHandler } from "../../core/ts/services";
 
 @Component
 export default class MyComponent extends Vue {}
 </script>
 
-<style lang="scss">
-.my-footer {
-  line-height: 60px;
+<style lang="scss" scoped>
 
-  height: 60px;
-  margin: 0 -15px;
-  padding: 0 15px;
-
-  background-color: #f6f8f9;
-}
 </style>

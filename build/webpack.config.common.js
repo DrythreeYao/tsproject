@@ -161,6 +161,7 @@ module.exports = {
       'browser-polyfill$': 'babel-polyfill/browser.js',
       'vue$': 'vue/dist/vue.esm.js',
       'vue-router$': 'vue-router/dist/vue-router.min.js',
+      'vue-lazyload$': 'vue-lazyload/vue-lazyload.js',
       'qs$': 'qs/dist/qs.js',
       'axios$': 'axios/dist/axios.min.js',
       'platform$': 'platform/platform',
@@ -175,6 +176,7 @@ module.exports = {
       // 'toastrcss$': 'toastr/toastr.min.css',
       // 'rangeslider$': 'rangeslider.js/dist/rangeslider.js',
       // 'rangeslidercss$': 'rangeslider.js/dist/rangeslider.css',
+      'logo': 'core/images/logo.png',
     }
   },
   entry: {
@@ -192,8 +194,6 @@ module.exports = {
     ],
     'core': 'core/core.ts',
     'routes': 'core/routes.ts', // 单页应用 需要引入路由
-    'index': 'index.ts', // 单页入口
-    'demo/demo': 'pages/demo/demo.ts', // 多页demo
   },
   output: {
     path: path.join(__dirname, '../' + WEBPACK_PUBLISH_ROOT),

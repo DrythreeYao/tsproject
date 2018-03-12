@@ -99,5 +99,4 @@ class ApiService {
   }
 }
 
-let apiService: ApiService = new ApiService()
-export default apiService
+export default new ApiService()

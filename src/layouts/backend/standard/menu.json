@@ -3,13 +3,10 @@
     "name": "艺典拍",
     "menus": [{
       "name": "拍场管理",
-      "link": "/yd-auction"
+      "link": "/yd-auction/list"
     }, {
-      "name": "Go to Foo",
-      "link": "/foo"
-    }, {
-      "name": "Go to Bar",
-      "link": "/bar"
+      "name": "拍品管理",
+      "link": "/yd-auction/detail"
     }]
   }]
 }

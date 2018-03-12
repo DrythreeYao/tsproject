@@ -3,16 +3,15 @@
  */
 
 // 通用样式
-// import 'element-ui/lib/theme-chalk/index.css'
-import 'browser-polyfill'
-import Vue from 'vue'
-import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+// import './scss/_element-variables.scss';
 import './core.scss'
-
+import 'browser-polyfill'
 import config from './ts/config'
 import { app } from './ts/app'
 import apiService from '../services/api';
-
+import Vue from 'vue'
+import VueLazyload from 'vue-lazyload';
 import {
   Pagination,
   Dialog,
@@ -85,6 +84,19 @@ import {
 config.init()
 apiService.init()
 app.init()
+
+// 注册懒加载组件
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: require('./images/spacer.png'),
+  loading: require('./images/spacer.png'),
+  attempt: 1,
+  adapter: {
+    loaded({ el }) {
+      el && el.parentNode && (el.parentNode.className = el.parentNode.className.replace('lazy', ''))
+    },
+  },
+})
 
 // 初始化ui
 Vue.use(Pagination)
