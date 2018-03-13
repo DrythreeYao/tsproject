@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table ref="multipleTable" v-loading="loading" :data="auctionList" class="table" @selection-change="handleSelectionChange">
+    <el-table :height="tableHeight" ref="multipleTable" v-loading="loading" :data="auctionList" class="table" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column sortable prop="id" label="标识" width="180">
         <template slot-scope="scope">
@@ -11,7 +11,7 @@
       <el-table-column prop="publisher" label="发布者" width="180"></el-table-column>
       <el-table-column label="价格(元)" width="100">
         <template slot-scope="scope">
-          ￥1000
+          ￥1000/{{tableHeight}}
         </template>
       </el-table-column>
       <el-table-column prop="name" label="标题" :show-overflow-tooltip="true"></el-table-column>
@@ -40,6 +40,7 @@ export default class MyComponent extends Vue {
   pageSize = 10;
   auctionList = [];
   multipleSelection = [];
+  tableHeight = window.innerHeight - (120 + 40 + 55 + 47)
 
   // @Prop({ default: 0 })
   // enterCounter?: number;
@@ -47,6 +48,8 @@ export default class MyComponent extends Vue {
   tabIndex?: string;
 
   created() {
+    console.log('window.innerHeight' + window.innerHeight);
+
     this.findYDAuctions();
   }
   // @Watch("enterCounter")

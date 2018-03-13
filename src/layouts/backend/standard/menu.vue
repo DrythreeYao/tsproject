@@ -6,7 +6,7 @@
     </el-radio-group> -->
     <h3 class="my-menu-toggle">
       <el-button type="text" icon="el-icon-d-arrow-left" v-if="!isCollapse" @click="toggleMenu"></el-button>
-      <el-button type="text" icon="el-icon-d-arrow-right" v-if="isCollapse"></el-button>
+      <el-button type="text" icon="el-icon-d-arrow-right" v-if="isCollapse" @click="toggleMenu"></el-button>
     </h3>
     <el-menu
       default-active="home"
@@ -50,7 +50,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class MyMenu extends Vue {
-  isCollapse = false;
+  isCollapse = true;
   menus = [];
 
   constructor() {

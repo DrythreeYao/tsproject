@@ -1,5 +1,6 @@
 // 0. 如果使用模块化机制编程，导入Vue和VueRouter，要调用 Vue.use(VueRouter)
 import Vue from 'vue'
+import store from '../store/index'
 import Component from 'vue-class-component';
 import VueRouter from 'vue-router'
 import { passportService } from "../core/ts/services";
@@ -29,11 +30,21 @@ const routes = [
     name: 'backend', path: '/', component: () => import('../layouts/backend/standard/main.vue'),
     beforeEnter: (to, from, next) => {
       passportService.getUserInfo().then(res => {
-        if (!res.data.data.whetherLogin) {
+        let data = res.data.data;
+        if (!data.whetherLogin) {
+          app.$store.commit('setLoginStatus', false)
           router.push({ name: 'passport/login' })
+        } else {
+          app.$store.commit('setUser', {
+            // id: data.id,
+            // sid: data.sid,
+            name: data.name,
+            portrait: data.portrait,
+          })
+          app.$store.commit('setLoginStatus', true)
+          next()
         }
       })
-      next()
     },
     children: [
       // { name: '', path: '', component: () => import('../pages/home/home.vue') },
@@ -57,6 +68,7 @@ const router = new VueRouter({
 // 记得要通过 router 配置参数注入路由，
 // 从而让整个应用都有路由功能
 const app = new Vue({
+  store,
   router,
 }).$mount('#app')
 

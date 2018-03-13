@@ -58,6 +58,7 @@ module.exports = {
       'babel-polyfill/browser.js',
       'vue/dist/vue.esm.js',
       'vue-router/dist/vue-router.min.js',
+      'vuex/dist/vuex.min.js',
       'vue-lazyload/vue-lazyload.js',
       'qs/dist/qs.js',
       'axios/dist/axios.min',

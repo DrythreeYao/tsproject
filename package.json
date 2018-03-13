@@ -32,8 +32,9 @@
     "url-search-params": "^0.10.0",
     "velocity": "^0.7.2",
     "vue": "^2.5.13",
+    "vue-lazyload": "^1.2.1",
     "vue-router": "^3.0.1",
-    "vue-lazyload": "^1.2.1"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@types/js-cookie": "^2.1.0",

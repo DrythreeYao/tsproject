@@ -6,7 +6,7 @@
       </li>
       <li class="title">艺典中国控制台</li>
     </ul>
-    <ul class="fr list-fr none" v-show="user.name" v-if="isShowUser">
+    <ul class="fr list-fr none" v-show="user.name" v-if="loginStatus">
       <li class="message" @click="handleMessage">
         <el-badge :value="messageCount" :max="99">
           <i class="el-icon-bell"></i>
@@ -39,22 +39,18 @@ import { User } from "src/core/ts/vo";
 @Component
 export default class MyComponent extends Vue {
   logo: string = require("logo");
-  user: User = {
-    name: "",
-    portrait: ""
-  };
   messageCount: number = 120;
+
   @Prop({ default: false })
   isShowUser?: boolean;
 
-  constructor() {
-    super();
-    this.init();
+  get user() {
+    return this.$store.state.user.user
+  }
+  get loginStatus() {
+    return this.$store.state.user.loginStatus
   }
 
-  init() {
-    this.doGetUserInfo();
-  }
   handleMessage() {
     this.$alert("消息总数: " + this.messageCount);
   }
@@ -64,23 +60,9 @@ export default class MyComponent extends Vue {
       this.doExit();
     }
   }
-  goLogin() {
-    this.$router.push({ name: "passport/login" });
-  }
   async doExit() {
     await passportService.exit();
-    this.goLogin();
-  }
-  async doGetUserInfo() {
-    let res = await passportService.getUserInfo();
-    let data = res.data.data;
-
-    if (!data.whetherLogin) {
-      this.goLogin();
-    } else {
-      this.user.portrait = data.portrait;
-      this.user.name = data.name;
-    }
+    this.$router.push({ name: "passport/login" });
   }
 }
 </script>

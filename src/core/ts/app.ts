@@ -3,14 +3,7 @@ import utils from './utils'
 import platform from 'platform'
 import store from 'store'
 import { passportService } from './services';
-
-/**
- * 登录用户信息
- */
-interface User {
-  id: number, // 用户标识
-  sid: string, // 登录后的会话id
-}
+import { User } from '../../core/ts/vo'
 
 /**
  * 应用信息
@@ -54,6 +47,8 @@ class App {
     this.user = {
       id: 0,
       sid: '',
+      name: '',
+      portrait: '',
     }
     this.appSetting = {
       locale: '',
