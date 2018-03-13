@@ -2,14 +2,24 @@
   <div>
     <el-table ref="multipleTable" v-loading="loading" :data="auctionList" class="table" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="id" label="标识" width="180"></el-table-column>
+      <el-table-column sortable prop="id" label="标识" width="180">
+        <template slot-scope="scope">
+          <div>{{scope.row.id}}</div>
+          <div class="one-line">{{scope.row.name}}</div>
+        </template>
+      </el-table-column>
       <el-table-column prop="publisher" label="发布者" width="180"></el-table-column>
-      <el-table-column prop="name" label="标题"></el-table-column>
+      <el-table-column label="价格(元)" width="100">
+        <template slot-scope="scope">
+          ￥1000
+        </template>
+      </el-table-column>
+      <el-table-column prop="name" label="标题" :show-overflow-tooltip="true"></el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
           <el-button type="text" size="small">编辑</el-button>
-      </template>
+        </template>
       </el-table-column>
     </el-table>
     <el-pagination background layout="total, sizes, prev, pager, next, jumper" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize" :total="totalNum" @size-change="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
@@ -64,6 +74,7 @@ export default class MyComponent extends Vue {
     this.pageSize = pageSize;
     this.findYDAuctions();
   }
+  showBidBox() {}
   findYDAuctions() {
     this.loading = true;
     this.doFindYDAuctions()
@@ -101,10 +112,6 @@ export default class MyComponent extends Vue {
     let data = res.data.data;
     let auctionList = data.result;
     let auction: YDAuction;
-    for (auction of auctionList) {
-      // utils.log(auction.customProperty);
-      // auction.name = '改变数据'
-    }
     this.auctionList = auctionList;
     this.totalNum = data.totalNum;
   }
@@ -122,4 +129,5 @@ export default class MyComponent extends Vue {
 .el-pagination {
   margin-top: 15px;
 }
+
 </style>

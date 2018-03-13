@@ -67,3 +67,25 @@
     content: '\0020';
   }
 }
+
+.line-clamp {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+
+  text-overflow: ellipsis;
+  word-break: break-word;
+  &.one {
+    -webkit-line-clamp: 1;
+  }
+  &.two {
+    -webkit-line-clamp: 2;
+  }
+}
+
+.one-line {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
