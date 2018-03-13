@@ -31,22 +31,18 @@ export default class MyComponent extends Vue {
   auctionList = [];
   multipleSelection = [];
 
-  @Prop({ default: 0 })
-  enterCounter?: number;
+  // @Prop({ default: 0 })
+  // enterCounter?: number;
   @Prop({ default: "1" })
-  activeStatus?: string;
+  tabIndex?: string;
 
-  constructor() {
-    super();
-    setTimeout(() => this.init());
-  }
-  init() {
+  created() {
     this.findYDAuctions();
   }
-  @Watch("enterCounter")
-  onBeforeRouteUpdate() {
-    this.findYDAuctions();
-  }
+  // @Watch("enterCounter")
+  // onBeforeRouteUpdate() {
+  //   this.findYDAuctions();
+  // }
   handleSelectionChange(rows: any) {
     console.log("选项变化: ", rows);
     this.$alert(rows.length, "选项数量");
@@ -78,7 +74,7 @@ export default class MyComponent extends Vue {
   }
   getActiveStatus() {
     let status: number = constants.YD_AUCTION_STATUS.ALL;
-    switch (this.activeStatus) {
+    switch (this.tabIndex) {
       case "1":
         status = constants.YD_AUCTION_STATUS.ALL;
         break;
@@ -126,5 +122,4 @@ export default class MyComponent extends Vue {
 .el-pagination {
   margin-top: 15px;
 }
-
 </style>
