@@ -31,7 +31,7 @@ module.exports = {
       }
     }, {
       enforce: 'pre',
-      test: /\.js$/,
+      test: /\.js(x)$/,
       use: {
         loader: 'eslint-loader',
         options: {
@@ -41,16 +41,25 @@ module.exports = {
         }
       }
     }, {
-      test: /\.js$/,
+      test: /\.js(x)$/,
       use: {
-        loader: 'babel-loader',
+        loader: 'babel-loader'
       }
+    }, {
+      test: /\.ts(x)?$/,
+      use: [{
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
+      }]
     }, {
       test: /\.vue$/,
       loader: 'vue-loader',
       // 若不配置options，vue-loader会使用默认处理方式
       options: {
         loaders: {
+          jsx: 'babel-loader',
           ts: 'ts-loader',
           // tsx: 'babel-loader!ts-loader',
           scss: [
@@ -74,17 +83,6 @@ module.exports = {
           ]
         }
       }
-    }, {
-      test: /\.ts(x)?$/,
-      use: [
-        // 'babel-loader',
-        {
-          loader: 'ts-loader',
-          options: {
-            appendTsSuffixTo: [/\.vue$/]
-          }
-        }
-      ]
     }, {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
@@ -155,7 +153,7 @@ module.exports = {
       path.join(__dirname, '../node_modules'),
       path.join(__dirname, '../' + SOURCE_CODE_ROOT)
     ],
-    extensions: ['.ts', '.tsx', '.js', '.vue'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.vue'],
     alias: {
       // 'element-ui': 'element-ui/lib/index.js',
       'browser-polyfill$': 'babel-polyfill/browser.js',
