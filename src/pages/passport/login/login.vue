@@ -12,7 +12,7 @@
   </el-container>
 </template>
 
-<script lang="ts">
+<script lang="tsx">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { utils, constants, app } from "../../../core/ts/app";
 import { errorHandler } from "../../../core/ts/services";

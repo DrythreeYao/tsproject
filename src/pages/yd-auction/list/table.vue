@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="tsx">
 import { Vue, Component, Prop, Watch, Model } from "vue-property-decorator";
 import { utils, constants, app } from "../../../core/ts/app";
 import { errorHandler, ydAuctionService } from "../../../core/ts/services";
@@ -61,6 +61,7 @@ export default class MyComponent extends Vue {
   created() {
     this.findYDAuctions();
   }
+
   // @Watch("enterCounter")
   // onBeforeRouteUpdate() {
   //   this.findYDAuctions();
@@ -120,7 +121,8 @@ export default class MyComponent extends Vue {
     if (row) {
       row.isTop = true;
       this.topItems.set(row.id, row);
-      (<any>this.$refs.multipleTable).toggleRowSelection(row, true);
+      let multipleTable: any = this.$refs.multipleTable;
+      multipleTable.toggleRowSelection(row, true);
       // this.$refs.multipleTable.clearSelection();
     } else {
       let item: YDAuction;

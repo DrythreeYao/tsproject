@@ -1,24 +1,20 @@
-<script lang="jsx">
-export default {
+<script lang="tsx">
+import { Vue, Component, Prop } from "vue-property-decorator";
+import { utils, constants, app } from "../../../core/ts/app";
+import { errorHandler } from "../../../core/ts/services";
+
+@Component
+export default class MyComponent extends Vue {
   render(h) {
-     return (
-        <div><a>拍场详情</a></div>
+    return (
+      <div>
+        <a>
+          拍场详情<h1>hahah</h1>
+        </a>
+      </div>
     );
   }
 }
-// import { Vue, Component, Prop } from "vue-property-decorator";
-// import { utils, constants, app } from "../../../core/ts/app";
-// import { errorHandler } from "../../../core/ts/services";
-
-// @Component
-// export default class MyComponent extends Vue {
-//   @Prop({ default: "" })
-//   title?: string = "";
-
-//   constructor() {
-//     super();
-//   }
-// }
 </script>
 
 <style lang="scss" scoped>

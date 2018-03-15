@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="tsx">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import MyTable from "./table.vue";
 

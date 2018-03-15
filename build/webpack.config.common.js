@@ -2,18 +2,19 @@ var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var config = require('../config')
+var utils = require('./utils')
+var vueLoaderConfig = require('./vue-loader-config')
 
 const SOURCE_CODE_ROOT = config.constants.sourceCodeRoot
 const WEBPACK_PUBLISH_ROOT = config.constants.webpackPublishRoot
 const ASSETS_PATH = config.constants.assetsPath
 const LIB_MANIFEST = '../' + WEBPACK_PUBLISH_ROOT + '/' + config.constants.libManifest
-const INCLUDE_PATHS = path.resolve(__dirname, './' + SOURCE_CODE_ROOT + '/core')
 
 module.exports = {
   module: {
     rules: [{
       enforce: 'pre',
-      test: /\.ts(x)$/,
+      test: /\.tsx?$/,
       use: {
         loader: 'tslint-loader',
         options: {
@@ -31,7 +32,7 @@ module.exports = {
       }
     }, {
       enforce: 'pre',
-      test: /\.js(x)$/,
+      test: /\.jsx?$/,
       use: {
         loader: 'eslint-loader',
         options: {
@@ -41,87 +42,44 @@ module.exports = {
         }
       }
     }, {
-      test: /\.js(x)$/,
+      test: /\.jsx?$/,
       use: {
         loader: 'babel-loader'
       }
     }, {
-      test: /\.ts(x)?$/,
-      use: [{
-        loader: 'ts-loader',
-        options: {
-          appendTsSuffixTo: [/\.vue$/]
+      test: /\.tsx?$/,
+      use: [
+        'babel-loader',
+        {
+          loader: 'ts-loader',
+          options: {
+            // 识别*.vue模块儿追加.tsx后缀
+            appendTsxSuffixTo: [/\.vue$/],
+            // appendTsSuffixTo: [/\.ts\.vue$/]
+          }
         }
-      }]
+      ]
     }, {
       test: /\.vue$/,
       loader: 'vue-loader',
       // 若不配置options，vue-loader会使用默认处理方式
-      options: {
-        loaders: {
-          jsx: 'babel-loader',
-          ts: 'ts-loader',
-          // tsx: 'babel-loader!ts-loader',
-          scss: [
-            'vue-style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true,
-                sourceMap: true
-              }
-            },
-            'postcss-loader',
-            {
-              loader: 'sass-loader',
-              options: {
-                outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'nested',
-                includePaths: [INCLUDE_PATHS],
-                sourceMap: true
-              }
-            },
-          ]
-        }
-      }
+      options: vueLoaderConfig
     }, {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
-        use: [{
-            loader: 'css-loader',
-            options: {
-              minimize: true,
-              sourceMap: true
-            }
-          },
+        use: [
+          utils.cssLoaderConfig,
           'postcss-loader',
         ],
         fallback: 'style-loader' // use style-loader extract css file
       })
-      // use: [
-      //   'style-loader', // creates style nodes from JS strings
-      //   'css-loader', // translates CSS into CommonJS
-      //   'postcss-loader'
-      // ]
     }, {
       test: /\.scss$/,
-      // include: /^(?=.*pages)/,
       use: ExtractTextPlugin.extract({
-        use: [{
-            loader: 'css-loader',
-            options: {
-              minimize: true,
-              sourceMap: true
-            }
-          },
+        use: [
+          utils.cssLoaderConfig,
           'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'nested',
-              includePaths: [INCLUDE_PATHS],
-              sourceMap: true
-            }
-          }
+          utils.scssLoaderConfig
         ],
         fallback: 'style-loader' // use style-loader extract css file
       })

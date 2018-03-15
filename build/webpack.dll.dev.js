@@ -2,12 +2,12 @@ var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var config = require('../config')
+var utils = require('./utils')
 
 const SOURCE_CODE_ROOT = config.constants.sourceCodeRoot
 const ASSETS_PATH = config.constants.assetsPath
 const WEBPACK_PUBLISH_ROOT = config.constants.webpackPublishRoot
 const LIB_MANIFEST = '../' + WEBPACK_PUBLISH_ROOT + '/' + config.constants.libManifest
-const INCLUDE_PATHS = path.resolve(__dirname, '../' + SOURCE_CODE_ROOT + '/core')
 
 module.exports = {
   module: {
@@ -17,13 +17,7 @@ module.exports = {
         use: [
           'css-loader',
           'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'nested',
-              includePaths: [INCLUDE_PATHS]
-            }
-          }
+          utils.scssLoaderConfig
         ],
         fallback: 'style-loader' // use style-loader extract cs's file
       })
