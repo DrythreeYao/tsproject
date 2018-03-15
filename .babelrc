@@ -1,12 +1,6 @@
 {
   "presets": ["es2015", "stage-2"],
   "plugins": [
-    "syntax-dynamic-import", [
-      "component",
-      {
-        "libraryName": "element-ui",
-        "style": false
-      }
-    ]
+    "syntax-dynamic-import"
   ]
 }
