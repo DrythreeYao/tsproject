@@ -1,36 +1,44 @@
 <template>
-  <div>
-    <el-table :height="tableHeight" ref="multipleTable" v-loading="loading" :data="auctionList" class="table" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column sortable prop="id" label="标识" width="180">
-        <template slot-scope="scope">
-          <div>{{scope.row.id}}</div>
-          <div class="one-line">{{scope.row.name}}</div>
-        </template>
-      </el-table-column>
-      <el-table-column prop="publisher" label="发布者" width="180"></el-table-column>
-      <el-table-column label="价格(元)" width="100">
-        <template slot-scope="scope">
-          ￥1000/{{tableHeight}}
-        </template>
-      </el-table-column>
-      <el-table-column prop="name" label="标题" :show-overflow-tooltip="true"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="100">
-        <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-          <el-button type="text" size="small">编辑</el-button>
-        </template>
-      </el-table-column>
+  <div class="yd-auction-list" :class="{'show-hiddens': showHiddenItems}">
+    <el-table ref="multipleTable" v-loading="loading"
+      :row-class-name="tableRowClassName"
+      :height="tableHeight"
+      :data="auctionList" class="table"
+      @selection-change="handleSelectionChange">
+        <el-table-column type="selection" width="55"></el-table-column>
+        <el-table-column sortable prop="id" label="标识" width="180">
+          <template slot-scope="scope">
+            <div>{{scope.row.id}}</div>
+            <div class="one-line">{{scope.row.name}}</div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="publisher" label="发布者" width="180"></el-table-column>
+        <el-table-column label="价格(元)" width="100">
+          <template slot-scope="scope">
+            ￥1000/{{tableHeight}}
+          </template>
+        </el-table-column>
+        <el-table-column prop="name" label="标题" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column fixed="right" label="操作" width="100">
+          <template slot-scope="scope">
+            <el-button type="text" size="small" @click="handleClick(scope.row)" >查看</el-button>
+            <el-button type="text" size="small" @click="setTop(scope.row)" >置顶</el-button>
+          </template>
+        </el-table-column>
     </el-table>
+    <el-button class="button-top" type="text" @click="setTop()">置顶</el-button>
+    <el-button class="button-top" type="text" @click="setHidden()">隐藏</el-button>
+    <el-checkbox class="is-show-hiddens" :checked="showHiddenItems" @change="showHiddenItems = !showHiddenItems">显示隐藏拍品，已隐藏 {{totalHiddenItems}} 件拍品</el-checkbox>
     <el-pagination background layout="total, sizes, prev, pager, next, jumper" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize" :total="totalNum" @size-change="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from "vue-property-decorator";
+import { Vue, Component, Prop, Watch, Model } from "vue-property-decorator";
 import { utils, constants, app } from "../../../core/ts/app";
 import { errorHandler, ydAuctionService } from "../../../core/ts/services";
 import { YDAuction } from "src/core/ts/vo";
+import store from "store";
 
 @Component
 export default class MyComponent extends Vue {
@@ -40,7 +48,10 @@ export default class MyComponent extends Vue {
   pageSize = 10;
   auctionList = [];
   multipleSelection = [];
-  tableHeight = window.innerHeight - (120 + 40 + 55 + 47)
+  topItems: Map<number, YDAuction> = new Map(); // 置顶项集合
+  hiddenItems: Map<number, YDAuction> = new Map(); // 隐藏项集合
+  tableHeight = window.innerHeight - (120 + 40 + 55 + 47 + 55);
+  showHiddenItems = false; // 展示已隐藏的选项
 
   // @Prop({ default: 0 })
   // enterCounter?: number;
@@ -48,18 +59,25 @@ export default class MyComponent extends Vue {
   tabIndex?: string;
 
   created() {
-    console.log('window.innerHeight' + window.innerHeight);
-
     this.findYDAuctions();
   }
   // @Watch("enterCounter")
   // onBeforeRouteUpdate() {
   //   this.findYDAuctions();
   // }
+  get totalHiddenItems() {
+    let count = 0;
+    let item: YDAuction;
+    for (item of this.auctionList) {
+      if (item.isHidden) {
+        count++;
+      }
+    }
+    return count;
+  }
   handleSelectionChange(rows: any) {
-    console.log("选项变化: ", rows);
-    this.$alert(rows.length, "选项数量");
     this.multipleSelection = rows;
+    // rows[rows.length - 1].isTop = true;
   }
   handleClick(row: YDAuction) {
     console.log(row);
@@ -77,6 +95,71 @@ export default class MyComponent extends Vue {
     this.pageSize = pageSize;
     this.findYDAuctions();
   }
+  tableRowClassName({ row, rowIndex }) {
+    if (row.isTop) {
+      return "row-top";
+    } else if (row.isHidden) {
+      return "row-hidden";
+    }
+    return "";
+  }
+  storeProductsSetting({
+    topItems,
+    hiddenItems
+  }: {
+    topItems?: Map<number, YDAuction>;
+    hiddenItems?: Map<number, YDAuction>;
+  }) {
+    let cache = store.get(constants.CACHE_KEY.YD_PRODUCTS_SETTING) || {};
+    if (topItems) cache.topItems = topItems;
+    if (hiddenItems) cache.hiddenItems = hiddenItems;
+    store.set(constants.CACHE_KEY.YD_PRODUCTS_SETTING, cache);
+  }
+  // 置顶
+  setTop(row?: YDAuction) {
+    if (row) {
+      row.isTop = true;
+      this.topItems.set(row.id, row);
+      (<any>this.$refs.multipleTable).toggleRowSelection(row, true);
+      // this.$refs.multipleTable.clearSelection();
+    } else {
+      let item: YDAuction;
+      for (item of this.multipleSelection) {
+        if (!item.isHidden) {
+          item.isTop = true;
+          this.topItems.set(item.id, item);
+        }
+      }
+    }
+    this.storeProductsSetting({
+      topItems: this.topItems
+    });
+    this.auctionList.sort((m: YDAuction, n: YDAuction) => {
+      if (!m.isTop && n.isTop) {
+        return 1;
+      } else if (m.isTop && !n.isTop) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  // 隐藏
+  setHidden(row?: YDAuction) {
+    if (row) {
+      row.isHidden = true;
+      this.topItems.set(row.id, row);
+    } else {
+      let item: YDAuction;
+      for (item of this.multipleSelection) {
+        if (!item.isTop) {
+          item.isHidden = true;
+          this.topItems.set(item.id, item);
+        }
+      }
+    }
+  }
+  // 出价
   showBidBox() {}
   findYDAuctions() {
     this.loading = true;
@@ -115,6 +198,10 @@ export default class MyComponent extends Vue {
     let data = res.data.data;
     let auctionList = data.result;
     let auction: YDAuction;
+    for (auction of auctionList) {
+      auction.isTop = false;
+      auction.isHidden = false;
+    }
     this.auctionList = auctionList;
     this.totalNum = data.totalNum;
   }
@@ -122,15 +209,31 @@ export default class MyComponent extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.item {
-  padding: 18px 0;
-}
-
-.box-card {
-  width: 480px;
-}
-.el-pagination {
+.el-pagination,
+.button-top {
   margin-top: 15px;
 }
-
+</style>
+<style lang="scss">
+.yd-auction-list {
+  &.show-hiddens {
+    .row-hidden {
+      display: table-row;
+    }
+  }
+  .is-show-hiddens {
+    margin-left: 15px;
+    .el-checkbox__label {
+      font-size: 13px;
+      padding-left: 5px;
+    }
+  }
+  .row-top {
+    background-color: #f0f9eb;
+  }
+  .row-hidden {
+    display: none;
+    background-color: #f5f5f5;
+  }
+}
 </style>

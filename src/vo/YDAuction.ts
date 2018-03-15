@@ -20,6 +20,6 @@ export default interface YDAuction {
   tradingPriceCount: number
   visitCount: number
   whetherTodayEnd: boolean
-  customProperty?: string // 自定义属性
-  customPic?: Picture
+  isTop?: boolean // 是否置顶
+  isHidden: boolean // 是否隐藏
 }

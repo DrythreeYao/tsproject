@@ -40,6 +40,10 @@ export enum CACHE_KEY {
    * 登录用户
    */
   USER = '_user',
+  /**
+   * 拍品设置
+   */
+  YD_PRODUCTS_SETTING = '_yd_products_setting',
 }
 
 /**

@@ -4,7 +4,7 @@
       <li class="logo p-img lazy">
         <img v-lazy="logo">
       </li>
-      <li class="title">艺典中国控制台</li>
+      <li class="title">控制台</li>
     </ul>
     <ul class="fr list-fr none" v-show="user.name" v-if="loginStatus">
       <li class="message" @click="handleMessage">
@@ -45,10 +45,10 @@ export default class MyComponent extends Vue {
   isShowUser?: boolean;
 
   get user() {
-    return this.$store.state.user.user
+    return this.$store.state.user.user;
   }
   get loginStatus() {
-    return this.$store.state.user.loginStatus
+    return this.$store.state.user.loginStatus;
   }
 
   handleMessage() {

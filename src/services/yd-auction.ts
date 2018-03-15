@@ -19,19 +19,20 @@ class YDAuctionService {
       pageSize: pageSize,
       pageNum: pageNum,
       hasSearch: hasSearch,
-    }).then(res => {
-      let list: YDAuction[] = res.data.data.result
-      let i = 0
-      for (const item of list) {
-        item.customProperty = '序列' + i++
-        item.customPic = {
-          id: 1,
-          url: 'https://www.tslang.cn/assets/images/logo_nocircle.svg',
-        }
-      }
-      // console.log(res.data.data.a.b)
-      return res
     })
+    // .then(res => {
+    //   let list: YDAuction[] = res.data.data.result
+    //   let i = 0
+    //   for (const item of list) {
+    //     item.customProperty = '序列' + i++
+    //     item.customPic = {
+    //       id: 1,
+    //       url: 'https://www.tslang.cn/assets/images/logo_nocircle.svg',
+    //     }
+    //   }
+    //   // console.log(res.data.data.a.b)
+    //   return res
+    // })
     // return apiService.post('information/findAuctionInformations')
     // return apiService.post('userinfo/getNoReadProduct')
   }
