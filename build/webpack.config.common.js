@@ -106,10 +106,10 @@ module.exports = {
       }
     }]
   },
-  resolve: { // 解决路径问题，可简化 alias entry 的路径配置
-    modules: [
+  resolve: {
+    modules: [ // 解决路径问题，可简化 alias entry 的路径配置以及模块儿路径可基于项目使用绝对路径
       path.join(__dirname, '../node_modules'),
-      path.join(__dirname, '../' + SOURCE_CODE_ROOT)
+      path.join(__dirname, '../' + SOURCE_CODE_ROOT),
     ],
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.vue'],
     alias: {

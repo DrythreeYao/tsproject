@@ -35,10 +35,10 @@
 
 <script lang="tsx">
 import { Vue, Component, Prop, Watch, Model } from "vue-property-decorator";
-import { utils, constants, app } from "../../../core/ts/app";
-import { errorHandler, ydAuctionService } from "../../../core/ts/services";
-import { YDAuction } from "src/core/ts/vo";
+import { utils, constants, app } from "core/ts/app";
+import { errorHandler, ydAuctionService } from "core/ts/services";
 import store from "store";
+import { YDAuction } from "core/ts/vo";
 
 @Component
 export default class MyComponent extends Vue {

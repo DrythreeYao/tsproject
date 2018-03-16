@@ -1,6 +1,6 @@
-import { passportService } from "../../core/ts/services";
-import User from "../../vo/User";
-import { app } from "../../core/ts/app";
+import { passportService } from "core/ts/services";
+import User from "vo/User";
+import { app } from "core/ts/app";
 
 // initial state
 const state = {

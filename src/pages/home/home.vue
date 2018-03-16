@@ -6,8 +6,8 @@
 
 <script lang="tsx">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { utils, constants, app } from "../../core/ts/app";
-import { errorHandler } from "../../core/ts/services";
+import { utils, constants, app } from "core/ts/app";
+import { errorHandler } from "core/ts/services";
 
 @Component
 export default class MyComponent extends Vue {}

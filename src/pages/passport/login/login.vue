@@ -14,10 +14,10 @@
 
 <script lang="tsx">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { utils, constants, app } from "../../../core/ts/app";
-import { errorHandler } from "../../../core/ts/services";
-import MyHeader from "../../../layouts/backend/standard/header.vue";
-import MyFooter from "../../../layouts/backend/standard/footer.vue";
+import { utils, constants, app } from "core/ts/app";
+import { errorHandler } from "core/ts/services";
+import MyHeader from "layouts/backend/standard/header.vue";
+import MyFooter from "layouts/backend/standard/footer.vue";
 
 @Component({
   components: {

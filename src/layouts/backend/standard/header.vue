@@ -32,9 +32,9 @@
 
 <script lang="tsx">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { utils, constants, app } from "../../../core/ts/app";
-import { errorHandler, passportService } from "../../../core/ts/services";
-import { User } from "src/core/ts/vo";
+import { utils, constants, app } from "core/ts/app";
+import { errorHandler, passportService } from "core/ts/services";
+import { User } from "core/ts/vo";
 
 @Component
 export default class MyComponent extends Vue {

@@ -3,7 +3,7 @@ import utils from './utils'
 import platform from 'platform'
 import store from 'store'
 import { passportService } from './services';
-import { User } from '../../core/ts/vo'
+import { User } from 'core/ts/vo'
 
 /**
  * 应用信息
