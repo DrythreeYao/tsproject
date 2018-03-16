@@ -44,6 +44,9 @@ const routes = [
           app.$store.commit('setLoginStatus', true)
           next()
         }
+      }).catch(err => {
+        console.log(err)
+        next()
       })
     },
     children: [
