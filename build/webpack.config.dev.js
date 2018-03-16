@@ -2,7 +2,8 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  devtool: 'source-map',
+  // devtool: 'source-map',
+  devtool: 'cheap-module-source-map', // 使用 cheap 模式可以大幅提高 souremap 生成的效率
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({

@@ -1,8 +1,6 @@
 'use strict'
-const path = require('path')
-const config = require('../config')
-const SOURCE_CODE_ROOT = config.constants.sourceCodeRoot
-const INCLUDE_PATHS = path.resolve(__dirname, './' + SOURCE_CODE_ROOT + '/core')
+const utils = require('./utils')
+const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 module.exports = {
   loaders: {
@@ -11,24 +9,13 @@ module.exports = {
     tsx: 'babel-loader!ts-loader!tslint-loader',
     scss: [
       'vue-style-loader',
-      {
-        loader: 'css-loader',
-        options: {
-          minimize: true,
-          sourceMap: true
-        }
-      },
+      utils.cssLoaderConfig,
       'postcss-loader',
-      {
-        loader: 'sass-loader',
-        options: {
-          outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'nested',
-          includePaths: [INCLUDE_PATHS],
-          sourceMap: true
-        }
-      },
+      utils.scssLoaderConfig
     ]
   },
+  cssSourceMap: !IS_PRODUCTION, // 开启webpack的devtool属性配置后此选项设置true才会输出sourcemap，与其他loader是一致的行为
+  cacheBusting: true,
   transformToRequire: {
     video: 'src',
     source: 'src',

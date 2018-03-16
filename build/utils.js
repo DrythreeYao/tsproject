@@ -11,7 +11,7 @@ const OUT_PUT_STYLE = process.env.NODE_ENV === 'production' ? 'compressed' : 'ne
 exports.cssLoaderConfig = {
   loader: 'css-loader',
   options: {
-    minimize: IS_NEED_SOURCE_MAP,
+    minimize: true,
     sourceMap: IS_NEED_SOURCE_MAP
   }
 }
