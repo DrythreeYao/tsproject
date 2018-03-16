@@ -33,7 +33,8 @@
       "es2017",
       "dom"
     ],
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "jsxFactory": "h"
   },
   "include": [
     "src/**/*"
