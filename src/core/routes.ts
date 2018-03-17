@@ -1,9 +1,10 @@
 // 0. 如果使用模块化机制编程，导入Vue和VueRouter，要调用 Vue.use(VueRouter)
 import Vue from 'vue'
-import store from '../store/index'
+import store from 'store/index'
 import Component from 'vue-class-component';
 import VueRouter from 'vue-router'
 import { passportService } from "../core/ts/services";
+
 Vue.use(VueRouter)
 
 // Register the router hooks with their names
@@ -32,16 +33,16 @@ const routes = [
       passportService.getUserInfo().then(res => {
         let data = res.data.data;
         if (!data.whetherLogin) {
-          app.$store.commit('setLoginStatus', false)
+          store.commit('setLoginStatus', false)
           router.push({ name: 'passport/login' })
         } else {
-          app.$store.commit('setUser', {
+          store.commit('setUser', {
             // id: data.id,
             // sid: data.sid,
             name: data.name,
             portrait: data.portrait,
           })
-          app.$store.commit('setLoginStatus', true)
+          store.commit('setLoginStatus', true)
           next()
         }
       }).catch(err => {
@@ -64,15 +65,21 @@ const routes = [
 // 你还可以传别的配置参数, 不过先这么简单着吧。
 const router = new VueRouter({
   mode: 'history',
-  routes, // （缩写）相当于 routes: routes
+  routes, // （缩写）
 })
 
-// 4. 创建和挂载根实例。
+// 导出模块儿
+export {
+  store,
+  router
+}
+
+// 4. 创建和挂载根实例。 启动入口在core.ts
 // 记得要通过 router 配置参数注入路由，
 // 从而让整个应用都有路由功能
-const app = new Vue({
-  store,
-  router,
-}).$mount('#app')
+// const app = new Vue({
+//   store,
+//   router,
+// }).$mount('#app')
 
 // 现在，应用已经启动了！

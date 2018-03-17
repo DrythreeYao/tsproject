@@ -152,8 +152,8 @@ module.exports = {
       'vue-style-loader/lib/listToStyles.js',
       'babel-helper-vue-jsx-merge-props/index.js',
     ],
+    'ui': 'core/ui.ts', // element-ui
     'core': 'core/core.ts',
-    'routes': 'core/routes.ts', // 单页应用 需要引入路由
   },
   output: {
     path: path.join(__dirname, '../' + WEBPACK_PUBLISH_ROOT),
