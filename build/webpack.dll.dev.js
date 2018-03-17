@@ -58,6 +58,7 @@ module.exports = {
       'axios/dist/axios.min',
       'platform/platform',
       'store/dist/store.modern.min',
+      'vue-style-loader/lib/addStylesClient.js', // 若使用SSR需要再考虑此处
       // 'element-ui/lib/index.js'
     ],
   },

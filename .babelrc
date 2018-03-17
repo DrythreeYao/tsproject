@@ -1,6 +1,7 @@
 {
   "presets": [
     ["env", {
+      "modules": false,
       "targets": {
         "browsers": [
           "> 1%",
@@ -16,7 +17,6 @@
     "transform-strict-mode",
     "transform-vue-jsx",
     "jsx-v-model",
-    "jsx-event-modifiers",
     "syntax-dynamic-import"
   ]
 }

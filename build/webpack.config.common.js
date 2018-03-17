@@ -124,6 +124,7 @@ module.exports = {
       'platform$': 'platform/platform',
       'store$': 'store/dist/store.modern.min',
       'url-search-params$': 'url-search-params/build/url-search-params.js',
+      'vue-style-loader$': 'vue-style-loader/lib/addStylesClient.js',
       // 'jquery$': 'jquery/dist/jquery.js',
       // 'lodash$': 'lodash/dist/lodash.min.js',
       // 'velocity$': 'velocity/velocity.min.js',
@@ -148,6 +149,8 @@ module.exports = {
       'vue-class-component',
       'vue-property-decorator',
       'css-loader/lib/css-base.js',
+      'vue-style-loader/lib/listToStyles.js',
+      'babel-helper-vue-jsx-merge-props/index.js',
     ],
     'core': 'core/core.ts',
     'routes': 'core/routes.ts', // 单页应用 需要引入路由
